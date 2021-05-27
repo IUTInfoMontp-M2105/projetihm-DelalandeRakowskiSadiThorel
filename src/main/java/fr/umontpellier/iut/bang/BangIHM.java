@@ -62,20 +62,20 @@ public class BangIHM extends Application {
         Pane panneau;
         Scene scene;
 
-            root=new BorderPane();
-            root.setMaxWidth(1500);
-            root.setMaxHeight(1000);
+        root=new BorderPane();
+        root.setMaxWidth(1500);
+        root.setMaxHeight(1000);
 
-            panneau=new Pane();
-            root.setCenter(panneau);
-            root.setId("pane");
-            scene = new Scene(root);
+        panneau=new Pane();
+        root.setCenter(panneau);
+        root.setId("pane");
+        scene = new Scene(root);
 
-            scene.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setHeight(1000);
-            primaryStage.setWidth(1500);
-            primaryStage.show();
+        scene.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.setHeight(1000);
+        primaryStage.setWidth(1500);
+        primaryStage.show();
     }
 
     /**
