@@ -10,6 +10,8 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -56,7 +58,24 @@ public class BangIHM extends Application {
      * Pour instancier la vue de renseignement des noms des joueurs
      */
     private void initStartView() {
-        startView = null;
+        BorderPane root;
+        Pane panneau;
+        Scene scene;
+
+            root=new BorderPane();
+            root.setMaxWidth(1500);
+            root.setMaxHeight(1000);
+
+            panneau=new Pane();
+            root.setCenter(panneau);
+            root.setId("pane");
+            scene = new Scene(root);
+
+            scene.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.setHeight(1000);
+            primaryStage.setWidth(1500);
+            primaryStage.show();
     }
 
     /**
