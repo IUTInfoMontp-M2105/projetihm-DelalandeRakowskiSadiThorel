@@ -44,7 +44,7 @@ public class BangIHM extends Application {
         initGameView();
         initResultView();
         Scene scene = new Scene(gameView);
-        primaryStage.setHeight(1000);
+        primaryStage.setHeight(750);
         primaryStage.setWidth(1500);
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
