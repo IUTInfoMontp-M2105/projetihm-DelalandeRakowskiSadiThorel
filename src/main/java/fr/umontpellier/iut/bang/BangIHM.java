@@ -34,13 +34,13 @@ public class BangIHM extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bang");
-        /*initStartView();
+        initStartView();
         startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
-        initPlayersNames();*/
+        initPlayersNames();
     }
 
     public void startGame() {
-        List<String> playerNames = new ArrayList<>();/*startView.getPlayersNamesList();*/
+        List<String> playerNames = startView.getPlayersNamesList();
         game = new IGame(new Game(Game.makePlayers(playerNames.toArray(new String[playerNames.size()]))));
         initGameView();
         initResultView();
@@ -113,7 +113,7 @@ public class BangIHM extends Application {
     public void onStopGame() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
-        alert.setContentText("Do you really want to stop playing ?");
+        alert.setContentText("Voulez vous vraiment arrêter de jouer ?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Platform.exit();
