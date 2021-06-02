@@ -4,6 +4,7 @@ import fr.umontpellier.iut.bang.logic.Game;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.ResultsView;
 import fr.umontpellier.iut.bang.views.StartView;
+import fr.umontpellier.iut.bang.views.ourviews.MyStartView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
@@ -35,7 +36,7 @@ public class BangIHM extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bang");
         initStartView();
-        startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
+        //startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
         initPlayersNames();
     }
 
@@ -59,24 +60,8 @@ public class BangIHM extends Application {
      * Pour instancier la vue de renseignement des noms des joueurs
      */
     private void initStartView() {
-        BorderPane root;
-        Pane panneau;
-        Scene scene;
+        startView = new MyStartView();
 
-        root=new BorderPane();
-        root.setMaxWidth(1500);
-        root.setMaxHeight(1000);
-
-        panneau=new Pane();
-        root.setCenter(panneau);
-        root.setId("pane");
-        scene = new Scene(root);
-
-        scene.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.setHeight(1000);
-        primaryStage.setWidth(1500);
-        primaryStage.show();
     }
 
     /**
