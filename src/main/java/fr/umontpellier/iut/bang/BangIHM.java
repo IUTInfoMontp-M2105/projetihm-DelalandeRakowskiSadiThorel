@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,18 +34,18 @@ public class BangIHM extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bang");
-        initStartView();
+        /*initStartView();
         startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
-        initPlayersNames();
+        initPlayersNames();*/
     }
 
     public void startGame() {
-        List<String> playerNames = startView.getPlayersNamesList();
+        List<String> playerNames = new ArrayList<>();/*startView.getPlayersNamesList();*/
         game = new IGame(new Game(Game.makePlayers(playerNames.toArray(new String[playerNames.size()]))));
         initGameView();
         initResultView();
         Scene scene = new Scene(gameView);
-        primaryStage.setHeight(1000);
+        primaryStage.setHeight(750);
         primaryStage.setWidth(1500);
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
