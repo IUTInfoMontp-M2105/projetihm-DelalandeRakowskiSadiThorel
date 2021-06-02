@@ -45,7 +45,7 @@ public class Test extends Application {
 
         logo.setFitWidth(200);
         logo.setFitHeight(200);
-        titre.setFitHeight(200);
+        titre.setFitHeight(  200);
         haut.getChildren().addAll(logo, titre);
         haut.setAlignment(Pos.CENTER);
         haut.setPadding(new Insets(50,0,0,0));
