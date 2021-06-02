@@ -34,13 +34,13 @@ public class BangIHM extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bang");
-        /*initStartView();
+        initStartView();
         startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
-        initPlayersNames();*/
+        initPlayersNames();
     }
 
     public void startGame() {
-        List<String> playerNames = new ArrayList<>();/*startView.getPlayersNamesList();*/
+        List<String> playerNames = startView.getPlayersNamesList();
         game = new IGame(new Game(Game.makePlayers(playerNames.toArray(new String[playerNames.size()]))));
         initGameView();
         initResultView();
