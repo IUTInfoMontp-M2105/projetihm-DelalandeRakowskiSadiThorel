@@ -31,7 +31,7 @@ Ces classes sont exposées dans un diagramme de classes simplifié de l'applicat
 
 ## Le diagramme de classes de l'application
 
-Pour consulter le [diagramme](ressources/Model.png), cliquez.
+Pour consulter le [diagramme](src/main/resources/images/Model.png), cliquez.
 
 Ce modèle ne détaille pas les classes et relations de la partie logique, ni ne liste les fonctions des classes que vous utiliserez. Pour ne pas surcharger le diagramme, les attributs, de nombreuses fonctions, ainsi que les paramètres des fonctions ne sont pas présentés. Vous y voyez surtout les classes qui sont nécessaires à votre travail, et précisemment les méthodes que vous devez implémenter.
 
