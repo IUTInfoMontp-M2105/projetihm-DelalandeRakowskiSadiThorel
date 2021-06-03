@@ -30,12 +30,23 @@ public class MyResultView extends ResultsView {
     private ImageView logo;
     private ImageView titre;
     private HBox haut;
+    private Label label;
+    private HBox millieu;
 
 
     public MyResultView(BangIHM bangIHM){
         super(bangIHM);
         BorderPane tout = new BorderPane();
         Scene scene =new Scene(tout);
+
+        //label
+        label = new Label();
+        label.setAlignment(Pos.CENTER);
+        label.setText(" Le Gagnant est : ");
+        label.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 50));
+        label.setTextFill(Color.web("#000000"));
+        label.setStyle("-fx-font-weight: bold");
+        label.setPadding(new Insets(100,0,0,250));
 
         //background
         ImageView background = new ImageView("src/main/resources/images/background.png");
@@ -68,7 +79,9 @@ public class MyResultView extends ResultsView {
         basbutton.setAlignment(Pos.CENTER);
         basbutton.setPadding(new Insets(0,0,50,0));
 
-
+        // milieu
+        millieu = new HBox();
+        millieu.getChildren().add(label);
 
         //logo
         logo = new ImageView("src/main/resources/images/logo.png");
@@ -80,11 +93,12 @@ public class MyResultView extends ResultsView {
         haut = new HBox();
         haut.getChildren().addAll(logo, titre);
         haut.setAlignment(Pos.CENTER);
-        haut.setPadding(new Insets(50,0,0,0));
+
 
 
         tout.setBottom(basbutton);
         tout.setTop(haut);
+        tout.setCenter(millieu);
         setWidth(1500);
         setHeight(750);
         setScene(scene);
