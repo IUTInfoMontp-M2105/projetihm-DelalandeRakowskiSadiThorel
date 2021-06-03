@@ -2,26 +2,20 @@ package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.BangIHM;
 import fr.umontpellier.iut.bang.views.ResultsView;
-import javafx.application.Application;
-import javafx.application.Platform;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
-import java.util.Optional;
-
-import static javafx.application.Application.launch;
 
 public class MyResultView extends ResultsView {
     private Button buttonPlayAgain;
@@ -31,15 +25,17 @@ public class MyResultView extends ResultsView {
     private ImageView titre;
     private HBox haut;
     private Label label;
+    private Label nomJoueur;
     private HBox millieu;
-
+    private VBox gagnant;
+    private Rectangle rectangle;
 
     public MyResultView(BangIHM bangIHM){
         super(bangIHM);
         BorderPane tout = new BorderPane();
         Scene scene =new Scene(tout);
 
-        //label
+        //label Est gagant
         label = new Label();
         label.setAlignment(Pos.CENTER);
         label.setText(" Le Gagnant est : ");
@@ -53,6 +49,16 @@ public class MyResultView extends ResultsView {
         background.setFitWidth(1550);
         background.setFitHeight(750);
         tout.getChildren().add(background);
+
+        // image derriere gagnant
+        Group group = new Group();
+        rectangle = new Rectangle();
+        rectangle.setWidth(350);
+        rectangle.setHeight(380);
+        rectangle.setArcWidth(140);
+        rectangle.setArcHeight(140);
+        rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
+
 
         //création button Rejouer et set de l'action quand pressé
         buttonPlayAgain = new Button("Rejouer");
@@ -77,11 +83,13 @@ public class MyResultView extends ResultsView {
         basbutton.getChildren().add(buttonPlayAgain);
         basbutton.getChildren().add(buttonStop);
         basbutton.setAlignment(Pos.CENTER);
-        basbutton.setPadding(new Insets(0,0,50,0));
+        basbutton.setPadding(new Insets(0,0,25,0));
 
         // milieu
         millieu = new HBox();
         millieu.getChildren().add(label);
+        millieu.getChildren().add(rectangle);
+
 
         //logo
         logo = new ImageView("src/main/resources/images/logo.png");
