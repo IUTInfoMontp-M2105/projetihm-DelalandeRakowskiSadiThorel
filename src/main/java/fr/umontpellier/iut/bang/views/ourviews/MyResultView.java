@@ -38,7 +38,7 @@ public class MyResultView extends ResultsView {
         Scene scene =new Scene(tout);
 
         //background
-        ImageView background = new ImageView("background.png");
+        ImageView background = new ImageView("src/main/resources/images/background.png");
         background.setFitWidth(1550);
         background.setFitHeight(750);
         tout.getChildren().add(background);
@@ -49,6 +49,7 @@ public class MyResultView extends ResultsView {
         buttonPlayAgain.setPrefWidth(250.0);
         buttonPlayAgain.setPrefHeight(50.0);
         buttonPlayAgain.setId("but");
+        buttonPlayAgain.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 40));
         buttonPlayAgain.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
 
         //création button quitter et set de l'action quand pressé
@@ -57,6 +58,7 @@ public class MyResultView extends ResultsView {
         buttonStop.setPrefWidth(250.0);
         buttonStop.setPrefHeight(50.0);
         buttonStop.setId("but");
+        buttonStop.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 40));
         buttonStop.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
 
         //button en bas
