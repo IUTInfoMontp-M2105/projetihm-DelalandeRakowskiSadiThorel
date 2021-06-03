@@ -37,33 +37,50 @@ public class MyResultView extends ResultsView {
         BorderPane tout = new BorderPane();
         Scene scene =new Scene(tout);
 
+        //background
+        ImageView background = new ImageView("background.png");
+        background.setFitWidth(1550);
+        background.setFitHeight(750);
+        tout.getChildren().add(background);
+
         //création button Rejouer et set de l'action quand pressé
         buttonPlayAgain = new Button("Rejouer");
         buttonPlayAgain.setOnAction(event -> playAgain());
+        buttonPlayAgain.setPrefWidth(250.0);
+        buttonPlayAgain.setPrefHeight(50.0);
+        buttonPlayAgain.setId("but");
+        buttonPlayAgain.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
 
         //création button quitter et set de l'action quand pressé
         buttonStop = new Button("Quitter");
         buttonStop.setOnAction(event -> stop());
+        buttonStop.setPrefWidth(250.0);
+        buttonStop.setPrefHeight(50.0);
+        buttonStop.setId("but");
+        buttonStop.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
 
         //button en bas
-        basbutton = new HBox();
+        basbutton = new HBox(50);
         basbutton.getChildren().add(buttonPlayAgain);
         basbutton.getChildren().add(buttonStop);
+        basbutton.setAlignment(Pos.CENTER);
+        basbutton.setPadding(new Insets(0,0,50,0));
 
 
-        //bas button
-        logo = new ImageView("../../../../../resources/images/logo.png");
-        titre = new ImageView("../../../../../resources/images/titre.png");
+
+        //logo
+        logo = new ImageView("src/main/resources/images/logo.png");
+        titre = new ImageView("src/main/resources/images/titre.png");
 
         logo.setFitWidth(200);
         logo.setFitHeight(200);
         titre.setFitHeight(200);
+        haut = new HBox();
         haut.getChildren().addAll(logo, titre);
         haut.setAlignment(Pos.CENTER);
         haut.setPadding(new Insets(50,0,0,0));
 
-        tout.getChildren().add(basbutton);
-        tout.getChildren().add(haut);
+
         tout.setBottom(basbutton);
         tout.setTop(haut);
         setWidth(1500);
