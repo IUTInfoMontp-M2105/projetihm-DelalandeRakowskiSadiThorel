@@ -51,13 +51,22 @@ public class MyResultView extends ResultsView {
         tout.getChildren().add(background);
 
         // image derriere gagnant
-        Group group = new Group();
+        VBox imageder = new VBox();
         rectangle = new Rectangle();
         rectangle.setWidth(350);
         rectangle.setHeight(380);
         rectangle.setArcWidth(140);
         rectangle.setArcHeight(140);
         rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
+        imageder.getChildren().add(rectangle);
+        // nomDuJoueur
+        Label nomDuJoueur = new Label("je suis dépité");
+        nomDuJoueur.setAlignment(Pos.CENTER);
+        nomDuJoueur.setPadding(new Insets(-200,0,0,80));
+        nomDuJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
+        nomDuJoueur.setTextFill(Color.web("#000000"));
+        nomDuJoueur.setStyle("-fx-font-weight: bold");
+        imageder.getChildren().add(nomDuJoueur);
 
 
         //création button Rejouer et set de l'action quand pressé
@@ -88,7 +97,7 @@ public class MyResultView extends ResultsView {
         // milieu
         millieu = new HBox();
         millieu.getChildren().add(label);
-        millieu.getChildren().add(rectangle);
+        millieu.getChildren().add(imageder);
 
 
         //logo
