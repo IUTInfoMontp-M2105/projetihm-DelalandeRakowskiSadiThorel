@@ -58,27 +58,45 @@ public class MyResultView extends ResultsView {
         rectangle.setArcHeight(140);
         rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
         imageder.getChildren().add(rectangle);
+
+        //alignement de image et nom
+        VBox aliV = new VBox();
+        /*aliV.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY,new BorderWidths(1))));*/
+        HBox aliNom = new HBox();
+        HBox aliImg = new HBox();
+        aliV.setAlignment(Pos.CENTER);
+        aliV.setPrefWidth(350);
+        aliV.setPrefHeight(300);
+        aliImg.setAlignment(Pos.CENTER);
+        aliNom.setAlignment(Pos.CENTER);
+        aliV.getChildren().add(aliImg);
+        aliV.getChildren().add(aliNom);
+        imageder.getChildren().add(aliV);
+
+        // gagnant :
+        /*bangIHM.getIGame().winnersProperty().get(0).getBangCharacter();*/
+
         // nomDuJoueur (label)
         Label nomDuJoueur = new Label("Super Man");
         nomDuJoueur.setAlignment(Pos.CENTER);
         nomDuJoueur.setPrefWidth(350);
-        nomDuJoueur.setLayoutY(280);
-        /*nomDuJoueur.setBorder(new Border(new BorderStroke(Color.BLACK,
+                /*nomDuJoueur.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));*/
         nomDuJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
         nomDuJoueur.setTextFill(Color.web("#000000"));
         nomDuJoueur.setStyle("-fx-font-weight: bold");
-        imageder.getChildren().add(nomDuJoueur);
+        aliNom.getChildren().add(nomDuJoueur);
 
         // image du gagnant
         String stringGa = "src/main/resources/images/characters/bartcassidy.png";
         ImageView imgGagnant = new ImageView(stringGa);
         imgGagnant.setPreserveRatio(true);
         imgGagnant.setFitHeight(200);
-        imgGagnant.setLayoutY(50);
-        imgGagnant.setLayoutX(110);
-        imageder.getChildren().add(imgGagnant);
+        aliImg.getChildren().add(imgGagnant);
+
 
         //création button Rejouer et set de l'action quand pressé
         buttonPlayAgain = new Button("Rejouer");
@@ -97,6 +115,7 @@ public class MyResultView extends ResultsView {
         buttonStop.setId("but");
         buttonStop.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 40));
         buttonStop.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+
 
         //button en bas
         basbutton = new HBox(50);
