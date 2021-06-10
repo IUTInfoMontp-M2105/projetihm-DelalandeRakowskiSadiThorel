@@ -3,6 +3,7 @@ package fr.umontpellier.iut.bang.views.ourviews;
 import fr.umontpellier.iut.bang.BangIHM;
 import fr.umontpellier.iut.bang.views.ResultsView;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -10,9 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -51,7 +50,7 @@ public class MyResultView extends ResultsView {
         tout.getChildren().add(background);
 
         // image derriere gagnant
-        VBox imageder = new VBox();
+        Pane imageder = new Pane();
         rectangle = new Rectangle();
         rectangle.setWidth(350);
         rectangle.setHeight(380);
@@ -59,15 +58,27 @@ public class MyResultView extends ResultsView {
         rectangle.setArcHeight(140);
         rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
         imageder.getChildren().add(rectangle);
-        // nomDuJoueur
-        Label nomDuJoueur = new Label("je suis dépité");
+        // nomDuJoueur (label)
+        Label nomDuJoueur = new Label("Super Man");
         nomDuJoueur.setAlignment(Pos.CENTER);
-        nomDuJoueur.setPadding(new Insets(-200,0,0,80));
+        nomDuJoueur.setPrefWidth(350);
+        nomDuJoueur.setLayoutY(280);
+        /*nomDuJoueur.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY,new BorderWidths(1))));*/
         nomDuJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
         nomDuJoueur.setTextFill(Color.web("#000000"));
         nomDuJoueur.setStyle("-fx-font-weight: bold");
         imageder.getChildren().add(nomDuJoueur);
 
+        // image du gagnant
+        String stringGa = "src/main/resources/images/characters/bartcassidy.png";
+        ImageView imgGagnant = new ImageView(stringGa);
+        imgGagnant.setPreserveRatio(true);
+        imgGagnant.setFitHeight(200);
+        imgGagnant.setLayoutY(50);
+        imgGagnant.setLayoutX(110);
+        imageder.getChildren().add(imgGagnant);
 
         //création button Rejouer et set de l'action quand pressé
         buttonPlayAgain = new Button("Rejouer");
@@ -123,7 +134,8 @@ public class MyResultView extends ResultsView {
 
     @Override
     public void playAgain(){
-        getBangIHM().startGame();
+        getBangIHM().getPrimaryStage().hide();
+        getBangIHM().initPlayersNames();
     }
 
     @Override
