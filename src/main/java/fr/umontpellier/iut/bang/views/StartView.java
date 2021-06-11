@@ -34,7 +34,7 @@ public abstract class StartView extends Stage implements Initializable {
     /**
      * Définit l'action à exécuter lorsque le nombre de participants change
      */
-    protected abstract void setNbPlayersChangeListener(ChangeListener<Integer> whenNbPlayersChanged);
+    protected abstract void setNbPlayersChangeListener(ChangeListener<String> whenNbPlayersChanged);
 
     /**
      * Vérifie que tous les noms des participants sont renseignés
