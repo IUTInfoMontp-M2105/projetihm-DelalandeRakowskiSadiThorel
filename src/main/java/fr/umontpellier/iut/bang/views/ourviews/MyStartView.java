@@ -79,7 +79,7 @@ public class MyStartView extends StartView {
                     for(int i = change.getFrom(); i < change.getTo(); i++){
                         listeDesNoms.remove(i);
                         listeDesNoms.add(i,change.getList().get(i).getText());
-                        System.out.println("changement");
+                        System.out.println(listeDesNoms);
                     }
                 }
             }
@@ -157,6 +157,7 @@ public class MyStartView extends StartView {
         public void handle(ActionEvent actionEvent) {
             setAllPlayersNamesList();
             System.out.println("youpi");
+            System.out.println(listeDesNoms);
         }
     };
 
@@ -167,7 +168,7 @@ public class MyStartView extends StartView {
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String ancientNombre, String nouveauNombre) {
             if(ancientNombre.compareTo(nouveauNombre)<0) {
-                for (int i = 0; i < getnbCourant(nouveauNombre); i++) {
+                for (int i = getnbCourant(ancientNombre); i < getnbCourant(nouveauNombre); i++) {
                     Label j = new Label("J" + (i + 1));
                     TextField t = new TextField();
                     parametrePartie.add(j, 1, i);
