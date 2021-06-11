@@ -57,15 +57,22 @@ public class MyStartView extends StartView {
         haut = new HBox();
         parametrePartie = new GridPane();
         ImageView background = new ImageView("src/main/resources/images/background.png");
-        nbJ = new TextField("4");
-
-        nbJ.setPrefWidth(40);
-        nbJ.setPrefHeight(10);
-
 
 
         logo = new ImageView("src/main/resources/images/logo.png");
         titre = new ImageView("src/main/resources/images/titre.png");
+
+        //nombre de Joueurs
+        Label nbJoueurs = new Label("Nombre de Joueurs");
+        nbJoueurs.setId("but");
+        nbJoueurs.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 20));
+        nbJoueurs.setLayoutX(850);
+        nbJoueurs.setLayoutY(100);
+        nbJ = new TextField("4");
+        nbJ.setPrefWidth(40);
+        nbJ.setPrefHeight(10);
+        nbJ.setLayoutX(900);
+        nbJ.setLayoutY(150);
 
         changementNom = new ListChangeListener<TextField>(){
             @Override
@@ -104,12 +111,12 @@ public class MyStartView extends StartView {
 
         background.setFitWidth(1550);
         background.setFitHeight(750);
-        Button start = new Button("Commencer");
+        Button start = new Button("Lancer la partie");
         start.setId("but");
         start.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 35));
         start.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
         start.setAlignment(Pos.CENTER);
-        start.setLayoutX(645);
+        start.setLayoutX(600);
         start.setLayoutY(-25);
         start.setOnAction(commancer);
 
@@ -146,15 +153,16 @@ public class MyStartView extends StartView {
         centre.getChildren().add(rectangle);
         parametrePartie.setLayoutY(75);
         parametrePartie.setLayoutX(650);
-        centre.getChildren().add(parametrePartie);
-
-       // parametrePartie.setStyle("-fx-arc-height: 140");
-        //parametrePartie.setStyle("-fx-arc-width: 140");
-        parametrePartie.setAlignment(Pos.CENTER);
         parametrePartie.setMaxHeight(300);
         parametrePartie.setMaxWidth(1000);
         parametrePartie.setVgap(5);
-        parametrePartie.add(nbJ,4,3);
+
+
+
+        //ajout des différents nodes au millieu
+        centre.getChildren().add(parametrePartie);
+        centre.getChildren().add(nbJ);
+        centre.getChildren().add(nbJoueurs);
         for (int i = 0; i<4; i++){
             Label j = new Label("J"+ (i+1));
             parametrePartie.add(j,1,i);
@@ -208,6 +216,7 @@ public class MyStartView extends StartView {
                 for (int i = getnbCourant(ancientNombre); i < getnbCourant(nouveauNombre); i++) {
                     Label j = new Label("J" + (i + 1));
                     TextField t = new TextField();
+                    t.setPromptText("Saisir un Nom");
                     parametrePartie.add(j, 1, i);
                     parametrePartie.add(t, 2, i);
                     joueurs.add(t);
