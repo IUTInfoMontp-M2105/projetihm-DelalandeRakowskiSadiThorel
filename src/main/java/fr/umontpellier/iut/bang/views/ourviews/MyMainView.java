@@ -50,7 +50,7 @@ public class MyMainView extends Stage {
         ImageView parchemin = new ImageView("src/main/resources/images/parchemin.png");
         parchemin.setPreserveRatio(true);
         parchemin.setFitHeight(125);
-        parchemin.setLayoutX(1500);
+        parchemin.setLayoutX(1375);
         tout.getChildren().add(parchemin);
 
 
