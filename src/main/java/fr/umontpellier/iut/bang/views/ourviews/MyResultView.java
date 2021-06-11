@@ -45,7 +45,7 @@ public class MyResultView extends ResultsView {
 
         //background
         ImageView background = new ImageView("src/main/resources/images/background.png");
-        background.setFitWidth(1550);
+        background.setFitWidth(1500);
         background.setFitHeight(750);
         tout.getChildren().add(background);
 
