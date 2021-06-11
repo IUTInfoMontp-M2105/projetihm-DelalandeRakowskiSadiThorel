@@ -14,8 +14,12 @@ public class MyGameView extends GameView {
 
     }
 
+    public void executeSetPassSelectedListener(){
+        setPassSelectedListener();
+    }
+
     @Override
-    protected void setPassSelectedListener() {
+    protected void setPassSelectedListener() {getIGame().onPass();
 
     }
 }

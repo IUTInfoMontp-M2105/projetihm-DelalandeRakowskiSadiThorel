@@ -119,6 +119,7 @@ public class MyMainView extends Stage {
         buttonPasser.setId("but");
         buttonPasser.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         buttonPasser.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+        buttonPasser.setOnAction(event ->imageJeu.executeSetPassSelectedListener());
         tout.getChildren().add(buttonPasser);
 
 
