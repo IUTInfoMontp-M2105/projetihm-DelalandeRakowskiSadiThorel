@@ -227,7 +227,7 @@ public class MyStartView extends StartView {
             /*else if(!nouveauNombre.isEmpty() && nb>4){
                 System.out.println("Je suis passer par là");
                 for (int i = 0; i< getnbCourant(ancientNombre) - getnbCourant(nouveauNombre) +1; i++) {
-                        parametrePartie.getChildren().remove(1,getnbCourant(ancientNombre)-i);
+                        parametrePartie.getChildren().remove(1,getnbCourant(ancientNombre)-i); y'a un soucis avec remove clairement
                     parametrePartie.getChildren().remove(2, getnbCourant(ancientNombre)-i);
                     nb-=1;
                 }
