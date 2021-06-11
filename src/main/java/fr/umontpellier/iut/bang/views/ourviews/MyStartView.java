@@ -1,12 +1,16 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.views.StartView;
+import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ObservableValueBase;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +31,8 @@ public class MyStartView extends StartView {
     private ImageView titre;
     private GridPane parametrePartie;
     private HBox haut;
-    private List<TextField> joueurs;
+    private ObservableList<TextField> joueurs;
+    private ListChangeListener<TextField> changementNom;
     private BorderPane root;
     private TextField nbJ;
     private ArrayList<String> listeDesNoms;
@@ -37,11 +42,11 @@ public class MyStartView extends StartView {
     public MyStartView() {
         super();
 
+        joueurs = FXCollections.observableArrayList(joueurs -> new Observable[] {joueurs.textProperty()} );
         setWidth(1500);
         setHeight(750);
         listeDesNoms = new ArrayList<>();
         root = new BorderPane();
-        joueurs = new ArrayList<>();
         haut = new HBox();
         parametrePartie = new GridPane();
         ImageView background = new ImageView("src/main/resources/images/background.png");
@@ -54,6 +59,32 @@ public class MyStartView extends StartView {
 
         logo = new ImageView("src/main/resources/images/logo.png");
         titre = new ImageView("src/main/resources/images/titre.png");
+
+        changementNom = new ListChangeListener<TextField>(){
+            @Override
+            public void onChanged(Change<? extends TextField> change){
+                change.next();
+                if(change.wasAdded()) {
+                    for (int i = 0; i < change.getAddedSize(); i++) {
+                        listeDesNoms.add(change.getAddedSubList().get(i).getText());
+                        System.out.println("ajout");
+                    }
+                }
+                if(change.wasRemoved()){
+                    for(int i = 0; i<change.getRemovedSize(); i++){
+                        listeDesNoms.remove(change.getRemoved().get(change.getRemovedSize()-i).getText());
+                    }
+                }
+                if(change.wasUpdated()){
+                    for(int i = change.getFrom(); i < change.getTo(); i++){
+                        listeDesNoms.remove(i);
+                        listeDesNoms.add(i,change.getList().get(i).getText());
+                        System.out.println("changement");
+                    }
+                }
+            }
+        };
+        joueurs.addListener(changementNom);
 
         logo.setFitWidth(200);
         logo.setFitHeight(200);
@@ -70,10 +101,12 @@ public class MyStartView extends StartView {
         start.setAlignment(Pos.CENTER);
         start.setMinSize(100, 100);
         start.setStyle("-fx-background-color: grey");
+        start.setOnAction(commancer);
 
         VBox bouton = new VBox();
         bouton.setAlignment(Pos.CENTER);
         bouton.getChildren().add(start);
+
 
         root.getChildren().add(background);
         root.setBottom(bouton);
@@ -89,10 +122,11 @@ public class MyStartView extends StartView {
         for (int i = 0; i<4; i++){
             Label j = new Label("J"+ (i+1));
             parametrePartie.add(j,1,i);
-            parametrePartie.add(new TextField(),2,i);
+            TextField t = new TextField();
+            parametrePartie.add(t,2,i);
+            joueurs.add(t);
 
         }
-
 
         root.setCenter(parametrePartie);
         root.setTop(haut);
@@ -103,6 +137,9 @@ public class MyStartView extends StartView {
         setScene(scene);
     }
 
+
+
+
     /**
      * Définit l'action à exécuter lorsque la liste des participants est correctement initialisée
      */
@@ -112,7 +149,16 @@ public class MyStartView extends StartView {
         playersNamesListProperty().addListener(whenPlayersNamesListIsSet);
     }
 
-
+    /**
+     * Le bouton
+     */
+    private EventHandler<ActionEvent> commancer = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            setAllPlayersNamesList();
+            System.out.println("youpi");
+        }
+    };
 
     /**
      * Définit l'action à exécuter lorsque le nombre de participants change
@@ -123,14 +169,16 @@ public class MyStartView extends StartView {
             if(ancientNombre.compareTo(nouveauNombre)<0) {
                 for (int i = 0; i < getnbCourant(nouveauNombre); i++) {
                     Label j = new Label("J" + (i + 1));
+                    TextField t = new TextField();
                     parametrePartie.add(j, 1, i);
-                    parametrePartie.add(new TextField(), 2, i);
+                    parametrePartie.add(t, 2, i);
+                    joueurs.add(t);
                 }
             }
-            /*if(ancientNombre.compareTo(nouveauNombre)>=0){
-                for (int i = getnbCourant(ancientNombre); i> getnbCourant(ancientNombre) - getnbCourant(nouveauNombre) ; i--) {
-                    parametrePartie.getChildren().remove(1,i);
-                    parametrePartie.getChildren().remove(2, i);
+           /* if(ancientNombre.compareTo(nouveauNombre)>=0){
+                for (int i = 0; i< getnbCourant(ancientNombre) - getnbCourant(nouveauNombre) +1; i++) {
+                    parametrePartie.getChildren().remove(1,getnbCourant(ancientNombre)-i);
+                    parametrePartie.getChildren().remove(2, getnbCourant(ancientNombre)-i);
                 }
             }*/
         }

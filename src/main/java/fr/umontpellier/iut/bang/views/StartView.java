@@ -42,7 +42,7 @@ public abstract class StartView extends Stage implements Initializable {
      */
     protected void setAllPlayersNamesList() {
         ArrayList<String> tempNamesList = new ArrayList<>();
-        for (int i = 1; i <= getNumberOfPlayers() ; i++) {
+        for (int i = 0; i < getNumberOfPlayers() ; i++) {
             String name = getPlayerNameByNumber(i);
             if (name == null || name.equals("")) {
                 tempNamesList.clear();
