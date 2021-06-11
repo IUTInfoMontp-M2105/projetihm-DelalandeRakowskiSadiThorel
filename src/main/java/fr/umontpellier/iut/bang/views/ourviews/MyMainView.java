@@ -49,6 +49,20 @@ public class MyMainView extends Stage {
         imageJeu.getChildren().add(rectangle);
         tout.getChildren().add(imageJeu);
 
+        // image derriere Main (main du joueur ect ....)
+        MyGameView imageMain = new MyGameView(bangIHM.getIGame()); // A CHANGER IMPERATIVEMENT CAR CE
+        imageMain.setLayoutX(1100);                                 // ne doit pas être une GameView
+        imageMain.setLayoutY(350);
+        Rectangle rectangleMain = new Rectangle();
+        rectangleMain.setWidth(375);
+        rectangleMain.setHeight(350);
+        rectangleMain.setArcWidth(140);
+        rectangleMain.setArcHeight(140);
+        rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
+        imageMain.getChildren().add(rectangleMain);
+        tout.getChildren().add(imageMain);
+
+
         //Outils
         ImageView parchemin = new ImageView("src/main/resources/images/parchemin.png");
         Pane outils = new Pane(parchemin);
