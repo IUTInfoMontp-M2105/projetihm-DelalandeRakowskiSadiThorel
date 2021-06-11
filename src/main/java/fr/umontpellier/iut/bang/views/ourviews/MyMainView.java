@@ -46,7 +46,12 @@ public class MyMainView extends Stage {
         rectangle.setArcWidth(140);
         rectangle.setArcHeight(140);
         rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
+        Label votreTable = new Label("Table de Jeu :");
+        votreTable.setLayoutX(45);
+        votreTable.setLayoutY(15);
+        votreTable.setStyle("-fx-font-size: 20");
         imageJeu.getChildren().add(rectangle);
+        imageJeu.getChildren().add(votreTable);
         tout.getChildren().add(imageJeu);
 
         // image derriere Main (main du joueur ect ....)
@@ -59,7 +64,12 @@ public class MyMainView extends Stage {
         rectangleMain.setArcWidth(140);
         rectangleMain.setArcHeight(140);
         rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
+        Label votreMain = new Label("Votre Main :");
+        votreMain.setLayoutX(45);
+        votreMain.setLayoutY(15);
+        votreMain.setStyle("-fx-font-size: 20");
         imageMain.getChildren().add(rectangleMain);
+        imageMain.getChildren().add(votreMain);
         tout.getChildren().add(imageMain);
 
 
