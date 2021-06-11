@@ -1,6 +1,9 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.BangIHM;
+import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.views.GameView;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.geometry.Insets;
@@ -55,9 +58,15 @@ public class MyMainView extends Stage {
         tout.getChildren().add(imageJeu);
 
         // image derriere Main (main du joueur ect ....)
-        MyGameView imageMain = new MyGameView(bangIHM.getIGame()); // A CHANGER IMPERATIVEMENT CAR CE
-        imageMain.setLayoutX(1100);                                 // ne doit pas être une GameView
-        imageMain.setLayoutY(350);
+
+        MyPlayerArea imageMain = new MyPlayerArea(new IPlayer(bangIHM.getIGame().getPlayers().get(0)), imageJeu);
+
+        /*Player p = bangIHM.getIGame().getPlayers().get(0);
+        p.addToHand(p.drawCard());
+        System.out.println(p.getHand());*/
+
+        imageMain.setLayoutX(1100);
+        imageMain.setLayoutY(300);
         Rectangle rectangleMain = new Rectangle();
         rectangleMain.setWidth(375);
         rectangleMain.setHeight(350);
@@ -71,6 +80,7 @@ public class MyMainView extends Stage {
         imageMain.getChildren().add(rectangleMain);
         imageMain.getChildren().add(votreMain);
         tout.getChildren().add(imageMain);
+        //Cartes
 
 
         //Outils
@@ -99,8 +109,17 @@ public class MyMainView extends Stage {
 
         tout.getChildren().add(outils);
 
-
-
+        //Bouton passer
+        //création button Rejouer et set de l'action quand pressé
+        Button buttonPasser = new Button("Passer");
+        buttonPasser.setLayoutX(1167);
+        buttonPasser.setLayoutY(660);
+        buttonPasser.setPrefWidth(250.0);
+        buttonPasser.setPrefHeight(25);
+        buttonPasser.setId("but");
+        buttonPasser.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
+        buttonPasser.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+        tout.getChildren().add(buttonPasser);
 
 
 
