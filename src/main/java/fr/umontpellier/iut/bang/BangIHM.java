@@ -36,7 +36,7 @@ public class BangIHM extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bang");
         initStartView();
-        //startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
+        startView.setPlayersListSetListener(whenPlayersNamesListIsSet);
         initPlayersNames();
     }
 
