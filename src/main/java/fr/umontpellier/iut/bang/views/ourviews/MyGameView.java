@@ -5,7 +5,6 @@ import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.views.GameView;
 import javafx.application.HostServices;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,7 +21,6 @@ public class MyGameView extends GameView {
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
         Pane tout = new Pane();
-        Scene scene = new Scene(tout);
 
         //background
         ImageView background = new ImageView("src/main/resources/images/background.png");
