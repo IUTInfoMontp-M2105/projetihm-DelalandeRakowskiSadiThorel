@@ -42,6 +42,7 @@ public class MyStartView extends StartView {
     public MyStartView() {
         super();
 
+        //instanciation
         joueurs = FXCollections.observableArrayList(joueurs -> new Observable[] {joueurs.textProperty()} );
         setWidth(1500);
         setHeight(750);
@@ -60,6 +61,7 @@ public class MyStartView extends StartView {
         logo = new ImageView("src/main/resources/images/logo.png");
         titre = new ImageView("src/main/resources/images/titre.png");
 
+        //listener des noms
         changementNom = new ListChangeListener<TextField>(){
             @Override
             public void onChanged(Change<? extends TextField> change){
@@ -86,6 +88,7 @@ public class MyStartView extends StartView {
         };
         joueurs.addListener(changementNom);
 
+        //logo
         logo.setFitWidth(200);
         logo.setFitHeight(200);
         titre.setFitHeight(200);
@@ -111,6 +114,7 @@ public class MyStartView extends StartView {
         root.getChildren().add(background);
         root.setBottom(bouton);
 
+        //parametres
         parametrePartie.setStyle("-fx-background-color: #b8b2b2");
         parametrePartie.setOpacity(0.8);
        // parametrePartie.setStyle("-fx-arc-height: 140");
@@ -119,6 +123,8 @@ public class MyStartView extends StartView {
         parametrePartie.setMaxHeight(300);
         parametrePartie.setMaxWidth(1000);
         parametrePartie.add(nbJ,4,3);
+
+        //joueurs initiaux
         for (int i = 0; i<4; i++){
             Label j = new Label("J"+ (i+1));
             parametrePartie.add(j,1,i);
