@@ -1,6 +1,8 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
+import fr.umontpellier.iut.bang.BangIHM;
 import fr.umontpellier.iut.bang.views.StartView;
+import javafx.application.HostServices;
 import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -20,6 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +46,9 @@ public class MyStartView extends StartView {
     
 
 
-    public MyStartView() {
+    public MyStartView(BangIHM bangIHM) {
         super();
 
-        //instanciation
         joueurs = FXCollections.observableArrayList(joueurs -> new Observable[] {joueurs.textProperty()} );
         setWidth(1500);
         setHeight(750);
@@ -61,7 +67,6 @@ public class MyStartView extends StartView {
         logo = new ImageView("src/main/resources/images/logo.png");
         titre = new ImageView("src/main/resources/images/titre.png");
 
-        //listener des noms
         changementNom = new ListChangeListener<TextField>(){
             @Override
             public void onChanged(Change<? extends TextField> change){
@@ -88,9 +93,8 @@ public class MyStartView extends StartView {
         };
         joueurs.addListener(changementNom);
 
-        //logo
-        logo.setFitWidth(200);
-        logo.setFitHeight(200);
+        logo.setFitWidth(150);
+        logo.setPreserveRatio(true);
         titre.setFitHeight(200);
         haut.getChildren().addAll(logo, titre);
         haut.setAlignment(Pos.CENTER);
@@ -101,40 +105,67 @@ public class MyStartView extends StartView {
         background.setFitWidth(1550);
         background.setFitHeight(750);
         Button start = new Button("Commencer");
+        start.setId("but");
+        start.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 35));
+        start.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
         start.setAlignment(Pos.CENTER);
-        start.setMinSize(100, 100);
-        start.setStyle("-fx-background-color: grey");
+        start.setLayoutX(645);
+        start.setLayoutY(-25);
         start.setOnAction(commancer);
 
-        VBox bouton = new VBox();
-        bouton.setAlignment(Pos.CENTER);
+        Pane bouton = new Pane();
+
         bouton.getChildren().add(start);
 
 
         root.getChildren().add(background);
+
+        //label
+        Label rules = new Label("Règles");
+        rules.setStyle("-fx-font-weight: bold");
+        rules.setStyle("-fx-font-size: 40");
+        rules.setTextFill(Color.web("White"));
+        ImageView pdf = new ImageView("src/main/resources/images/pdf.png");
+        pdf.setPreserveRatio(true);
+        pdf.setFitHeight(40);
+        rules.setGraphic(pdf);
+        rules.setLayoutX(1300);
+        rules.setOnMouseClicked(mouseEvent -> lirePdfRegles(bangIHM));
+        bouton.getChildren().add(rules);
+
         root.setBottom(bouton);
 
-        //parametres
-        parametrePartie.setStyle("-fx-background-color: #b8b2b2");
-        parametrePartie.setOpacity(0.8);
+        Pane centre= new Pane();
+        Rectangle rectangle = new Rectangle();
+        rectangle.setWidth(750);
+        rectangle.setHeight(340);
+        rectangle.setArcWidth(140);
+        rectangle.setArcHeight(140);
+        rectangle.setLayoutX(350);
+        rectangle.setFill(Color.rgb(217, 217, 217, 0.7));
+        centre.getChildren().add(rectangle);
+        parametrePartie.setLayoutY(75);
+        parametrePartie.setLayoutX(650);
+        centre.getChildren().add(parametrePartie);
+
        // parametrePartie.setStyle("-fx-arc-height: 140");
         //parametrePartie.setStyle("-fx-arc-width: 140");
         parametrePartie.setAlignment(Pos.CENTER);
         parametrePartie.setMaxHeight(300);
         parametrePartie.setMaxWidth(1000);
+        parametrePartie.setVgap(5);
         parametrePartie.add(nbJ,4,3);
-
-        //joueurs initiaux
         for (int i = 0; i<4; i++){
             Label j = new Label("J"+ (i+1));
             parametrePartie.add(j,1,i);
             TextField t = new TextField();
+            t.setPromptText("Saisir un Nom");
             parametrePartie.add(t,2,i);
             joueurs.add(t);
 
         }
 
-        root.setCenter(parametrePartie);
+        root.setCenter(centre);
         root.setTop(haut);
 
 
@@ -234,5 +265,10 @@ public class MyStartView extends StartView {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+    private void lirePdfRegles(BangIHM bangIHM) {
+        File file = new File("src/main/resources/pdf/Bang-regles.pdf");
+        HostServices hostServices = bangIHM.getHostServices();
+        hostServices.showDocument(file.getAbsolutePath());
     }
 }

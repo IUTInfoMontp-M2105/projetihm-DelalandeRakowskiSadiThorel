@@ -61,7 +61,7 @@ public class BangIHM extends Application {
      * Pour instancier la vue de renseignement des noms des joueurs
      */
     private void initStartView() {
-        startView = new MyStartView();
+        startView = new MyStartView(this);
 
     }
 
