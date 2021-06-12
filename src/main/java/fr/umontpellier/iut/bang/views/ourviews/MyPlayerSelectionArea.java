@@ -25,9 +25,6 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         HBox triche = new HBox(); // triche permet un espace entre la carte Charactere et les cartes inplay
         triche.setMinHeight(5);
         triche.setMaxHeight(5); // inutile mais principalement pour éviter les problèmes
-        triche.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,new BorderWidths(1))));
         // les setLayout et autre de inplay sont dans MyPlayerArea
 
 
