@@ -164,7 +164,11 @@ public class MyGameView extends GameView {
             carteCharacter.setPreserveRatio(true);
             carteCharacter.setFitHeight(125);
             carteCharacter.setLayoutX(110);
+            Label nomJoueur = new Label(mains.get(i).getPlayer().getName());
+            nomJoueur.setLayoutX(118);
+            nomJoueur.setLayoutY(85);
             joueur.getChildren().add(carteCharacter);
+            joueur.getChildren().add(nomJoueur);
         }
         listJoueurPointer.get(0).setLayoutX(425);
         listJoueurPointer.get(0).setLayoutY(20);
