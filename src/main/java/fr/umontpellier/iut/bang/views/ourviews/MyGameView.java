@@ -1,10 +1,12 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.BangIHM;
+import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.views.GameView;
 import javafx.application.HostServices;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -149,6 +151,55 @@ public class MyGameView extends GameView {
         listJoueurPointer.get(3).setLayoutX(750);
         listJoueurPointer.get(3).setLayoutY(250);
 
+        //Pioche et défausse
+        //pioche
+        VBox emplacementPioche = new VBox();
+        Pane pioche = new Pane();
+        Label labelPioche = new Label("Pioche");
+        labelPioche.setId("but");
+        labelPioche.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
+        labelPioche.setMaxHeight(15);
+        emplacementPioche.setAlignment(Pos.CENTER);
+        emplacementPioche.getChildren().add(labelPioche);
+        emplacementPioche.getChildren().add(pioche);
+        emplacementPioche.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY,new BorderWidths(1))));
+        emplacementPioche.setLayoutX(460);
+        emplacementPioche.setLayoutY(270);
+        emplacementPioche.setPrefHeight(180);
+        emplacementPioche.setPrefWidth(100);
+        tout.getChildren().add(emplacementPioche);
+
+        ImageView piochec = new ImageView("src/main/resources/images/characters/bartcassidy.png");
+        piochec.setPreserveRatio(true);
+        piochec.setFitHeight(150);
+        pioche.getChildren().add(piochec); // exemple card
+
+
+        //défausse
+        VBox emplacementDefausse = new VBox();
+        Pane defausse = new Pane();
+        Label labelDefausse = new Label("Défausse");
+        labelDefausse.setId("but");
+        labelDefausse.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
+        labelDefausse.setMaxHeight(15);
+        emplacementDefausse.setAlignment(Pos.CENTER);
+        emplacementDefausse.getChildren().add(labelDefausse);
+        emplacementDefausse.getChildren().add(defausse);
+        emplacementDefausse.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY,new BorderWidths(1))));
+        emplacementDefausse.setLayoutX(585);
+        emplacementDefausse.setLayoutY(270);
+        emplacementDefausse.setPrefHeight(180);
+        emplacementDefausse.setPrefWidth(100);
+        tout.getChildren().add(emplacementDefausse);
+
+        ImageView defaussec = new ImageView("src/main/resources/images/characters/bartcassidy.png");
+        defaussec.setPreserveRatio(true);
+        defaussec.setFitHeight(150);
+        defausse.getChildren().add(defaussec); // exemple card
 
 
         setWidth(1500);
