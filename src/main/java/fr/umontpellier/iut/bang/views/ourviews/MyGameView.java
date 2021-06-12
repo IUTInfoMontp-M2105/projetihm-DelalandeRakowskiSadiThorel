@@ -4,7 +4,9 @@ import fr.umontpellier.iut.bang.BangIHM;
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.views.GameView;
+import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.application.HostServices;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -23,9 +25,22 @@ import java.util.List;
 
 public class MyGameView extends GameView {
     Button buttonPasser;
+    Pane tout = new Pane();
+    List<MyPlayerArea> mains = new ArrayList<>();
+    IGame game;
+    BangIHM bangIHM;
+
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
-        Pane tout = new Pane();
+        this.game=game;
+        this.bangIHM=bangIHM;
+
+
+        //initialisation main joueur
+        for (Player p : game.getPlayers()) {
+            MyPlayerArea imageMain = new MyPlayerArea(new IPlayer(p), this);
+            mains.add(imageMain);
+        }
 
         //background
         ImageView background = new ImageView("src/main/resources/images/background.png");
@@ -57,29 +72,31 @@ public class MyGameView extends GameView {
         imageJeu.getChildren().add(votreTable);
         tout.getChildren().add(imageJeu);
 
-        // image derriere Main (main du joueur ect ....)
-
-        MyPlayerArea imageMain = new MyPlayerArea(new IPlayer(game.getPlayers().get(0)), this);
+        /** image derriere Main (main du joueur ect ....)**/
 
         /*Player p = bangIHM.getIGame().getPlayers().get(0);
         p.addToHand(p.drawCard());
         System.out.println(p.getHand());*/
 
-        imageMain.setLayoutX(1100);
-        imageMain.setLayoutY(300);
-        Rectangle rectangleMain = new Rectangle();
-        rectangleMain.setWidth(375);
-        rectangleMain.setHeight(350);
-        rectangleMain.setArcWidth(140);
-        rectangleMain.setArcHeight(140);
-        rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
-        Label votreMain = new Label("Votre Main :");
-        votreMain.setLayoutX(45);
-        votreMain.setLayoutY(15);
-        votreMain.setStyle("-fx-font-size: 20");
-        imageMain.getChildren().add(rectangleMain);
-        imageMain.getChildren().add(votreMain);
-        tout.getChildren().add(imageMain);
+        for (MyPlayerArea p : mains) {
+
+            p.setLayoutX(1100);
+            p.setLayoutY(300);
+            Rectangle rectangleMain = new Rectangle();
+            rectangleMain.setWidth(375);
+            rectangleMain.setHeight(350);
+            rectangleMain.setArcWidth(140);
+            rectangleMain.setArcHeight(140);
+            rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
+            Label votreMain = new Label("Votre Main :" );
+            votreMain.setLayoutX(45);
+            votreMain.setLayoutY(15);
+            votreMain.setStyle("-fx-font-size: 20");
+            p.getChildren().add(rectangleMain);
+            p.getChildren().add(votreMain);
+        }
+
+
         //Cartes
 
 
@@ -110,7 +127,7 @@ public class MyGameView extends GameView {
         tout.getChildren().add(outils);
 
         //Bouton passer
-        //création button Rejouer et set de l'action quand pressé
+        //création button passer et set de l'action quand pressé
         buttonPasser = new Button("Passer");
         buttonPasser.setLayoutX(1167);
         buttonPasser.setLayoutY(660);
@@ -120,6 +137,7 @@ public class MyGameView extends GameView {
         buttonPasser.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         buttonPasser.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
         tout.getChildren().add(buttonPasser);
+        buttonPasser.setOnAction(event -> setPassSelectedListener());
 
 
 
@@ -141,7 +159,6 @@ public class MyGameView extends GameView {
             v.setPrefHeight(225);
             v.setPrefWidth(300);
         }
-        System.out.println(listJoueurPointer);
         listJoueurPointer.get(0).setLayoutX(425);
         listJoueurPointer.get(0).setLayoutY(20);
         listJoueurPointer.get(1).setLayoutX(425);
@@ -206,6 +223,7 @@ public class MyGameView extends GameView {
         setHeight(750);
         getChildren().add(tout);
         getIGame().run();
+        tout.getChildren().add(findPlayerArea(game.getCurrentPlayer()));// ajout de la main Joueur
     }
     private void lirePdfRegles(BangIHM bangIHM){
         File file = new File("src/main/resources/pdf/Bang-regles.pdf");
@@ -220,7 +238,21 @@ public class MyGameView extends GameView {
 
 
     @Override
-    protected void setPassSelectedListener() {buttonPasser.setOnAction(event -> getIGame().onPass());
+    protected void setPassSelectedListener() {          // ça marche pas car current player ne change pas
+        System.out.println("t'as cliqué gros");
+        Player ancientCurrentPlayer = game.getCurrentPlayer();
+        buttonPasser.setOnAction(event -> getIGame().onPass());
+        tout.getChildren().remove(findPlayerArea(ancientCurrentPlayer));
+        tout.getChildren().add(findPlayerArea(game.getCurrentPlayer()));
 
+    }
+    private PlayerArea findPlayerArea(Player player) {
+        for (Node n : mains) {
+            PlayerArea nodePlayerArea = (PlayerArea) n;
+            Player nodePlayer = nodePlayerArea.getPlayer();
+            if (nodePlayer.equals(player))
+                return nodePlayerArea;
+        }
+        return null;
     }
 }
