@@ -360,10 +360,10 @@ public class Game {
     private static List<BangCharacter> getBangCharacters() {
         List<BangCharacter> possibleCharacters = new ArrayList<>();
         possibleCharacters.add(new BartCassidy());
-        possibleCharacters.add(new BlackJack());
-        possibleCharacters.add(new JesseJones());
+        //possibleCharacters.add(new BlackJack());
+        //possibleCharacters.add(new JesseJones());
         possibleCharacters.add(new Jourdonnais());
-        possibleCharacters.add(new KitCarlson());
+        //possibleCharacters.add(new KitCarlson());
         possibleCharacters.add(new PaulRegret());
         possibleCharacters.add(new RoseDoolan());
         possibleCharacters.add(new SlabTheKiller());
