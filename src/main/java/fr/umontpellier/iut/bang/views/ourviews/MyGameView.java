@@ -160,6 +160,7 @@ public class MyGameView extends GameView {
             tout.getChildren().add(v);
             v.setPrefHeight(225);
             v.setPrefWidth(300);
+            joueur.getChildren().add(mains.get(i).getCard());
         }
         listJoueurPointer.get(0).setLayoutX(425);
         listJoueurPointer.get(0).setLayoutY(20);
@@ -169,6 +170,7 @@ public class MyGameView extends GameView {
         listJoueurPointer.get(2).setLayoutY(250); // c'est dégueux d'ailleurs
         listJoueurPointer.get(3).setLayoutX(750);
         listJoueurPointer.get(3).setLayoutY(250);
+
 
         //Pioche et défausse
         //pioche

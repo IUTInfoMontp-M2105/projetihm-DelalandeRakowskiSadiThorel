@@ -69,5 +69,8 @@ public abstract class PlayerArea extends Pane {
     protected void setWeaponListener(ChangeListener<? super WeaponCard> whenWeaponChanges) {
         player.weaponProperty().addListener(whenWeaponChanges);
     }
+    public String getImageCharacter(Player playerImg) {
+        return "images/characters/" + playerImg.getBangCharacter().getName().toLowerCase().replaceAll(" ", "")+".png";
+    }
 
 }

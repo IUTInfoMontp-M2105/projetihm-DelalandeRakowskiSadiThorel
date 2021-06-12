@@ -9,6 +9,8 @@ import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -16,12 +18,16 @@ import javafx.stage.Stage;
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
     private Label nomDuJoueur;
+    ImageView card = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
+        String cardCharacter = this.getImageCharacter(player.getPlayer());
+        card.setImage(new Image(cardCharacter));
         mainJoueur = new HBox();
         mainJoueur.setSpacing(-25);
         nomDuJoueur = new Label(player.getName());
         setHandListener(whenHandIsUpdated);
+
     }
 
     private ListChangeListener<Card> whenHandIsUpdated = new ListChangeListener<Card>() {
@@ -65,5 +71,9 @@ public class MyPlayerArea extends PlayerArea {
 
     public HBox getMainJoueur() {
         return mainJoueur;
+    }
+
+    public ImageView getCard() {
+        return card;
     }
 }
