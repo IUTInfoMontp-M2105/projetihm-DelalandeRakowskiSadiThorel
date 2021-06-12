@@ -72,5 +72,8 @@ public abstract class PlayerArea extends Pane {
     public String getImageCharacter(Player playerImg) {
         return "images/characters/" + playerImg.getBangCharacter().getName().toLowerCase().replaceAll(" ", "")+".png";
     }
+    public String getImageRole(Player playerImg) {
+        return "images/roles/" + playerImg.getRole().name().toLowerCase()+".png";
+    }
 
 }

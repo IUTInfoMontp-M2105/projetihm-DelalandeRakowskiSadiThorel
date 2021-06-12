@@ -20,11 +20,14 @@ public class MyPlayerArea extends PlayerArea {
     private HBox inPlay;
     private MyPlayerSelectionArea selection;
     ImageView card = new ImageView();
+    ImageView cardRole = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
         selection = new MyPlayerSelectionArea(this);
         String cardCharacter = this.getImageCharacter(player.getPlayer());
+        String cardRoleString = this.getImageRole(player.getPlayer());
         card.setImage(new Image(cardCharacter));
+        cardRole.setImage(new Image(cardRoleString));
         mainJoueur = new HBox();
         inPlay=new HBox();
         inPlay.setSpacing(-25);
@@ -100,6 +103,10 @@ public class MyPlayerArea extends PlayerArea {
 
     public ImageView getCard() {
         return card;
+    }
+
+    public ImageView getCardRole() {
+        return cardRole;
     }
 
     public HBox getInPlayJoueur() {

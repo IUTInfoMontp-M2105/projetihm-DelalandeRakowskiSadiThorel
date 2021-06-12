@@ -34,10 +34,17 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique.setStyle("-fx-background-color: White");*/
 
         ImageView carteCharacter = playerArea.getCard();
+        ImageView carteRole = playerArea.getCardRole();
+        carteRole.setPreserveRatio(true);
+        carteRole.setFitHeight(125);
+        carteRole.setLayoutX(155);
+        carteRole.setLayoutY(10);
+        carteRole.setRotate(30);
         carteCharacter.setPreserveRatio(true);
         carteCharacter.setFitHeight(125);
         carteCharacter.setLayoutX(110);
         Pane h = new Pane();
+        h.getChildren().add(carteRole);
         h.getChildren().add(carteCharacter);
         h.getChildren().add(nomJoueur);
 
