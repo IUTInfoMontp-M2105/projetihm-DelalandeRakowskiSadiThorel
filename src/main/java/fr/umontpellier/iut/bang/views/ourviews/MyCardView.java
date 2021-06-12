@@ -19,7 +19,7 @@ public class MyCardView extends CardView {
         imageCarte.setImage(new Image(name));
         imageCarte.setPreserveRatio(true);
         Label nomCarte = new Label(name);
-        imageCarte.setFitHeight(125);
+        imageCarte.setFitHeight(110);
         getChildren().add(imageCarte);
         setCardSelectionListener();
     }

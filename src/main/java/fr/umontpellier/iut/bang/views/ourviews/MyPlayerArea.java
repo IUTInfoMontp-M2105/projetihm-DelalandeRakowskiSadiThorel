@@ -2,6 +2,7 @@ package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.cards.BlueCard;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.GameView;
@@ -12,12 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
     private Label nomDuJoueur;
+    private HBox inPlay;
     private MyPlayerSelectionArea selection;
     ImageView card = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
@@ -26,9 +26,12 @@ public class MyPlayerArea extends PlayerArea {
         String cardCharacter = this.getImageCharacter(player.getPlayer());
         card.setImage(new Image(cardCharacter));
         mainJoueur = new HBox();
+        inPlay=new HBox();
+        inPlay.setSpacing(-25);
         mainJoueur.setSpacing(-25);
         nomDuJoueur = new Label(player.getName());
         setHandListener(whenHandIsUpdated);
+        setInPlayListener(whenInplayIsUpdated);
 
     }
 
@@ -38,11 +41,29 @@ public class MyPlayerArea extends PlayerArea {
             while(change.next()){
                 if(change.wasAdded()){
                     for (Card c : change.getAddedSubList()){
-                        mainJoueur.getChildren().add(new MyCardView(new ICard(c),MyPlayerArea.this));
+                        MyCardView cardBleu = new MyCardView(new ICard(c),MyPlayerArea.this);
+                        mainJoueur.getChildren().add(cardBleu);
                     }
                 }else if (change.wasRemoved()){
                     for (Card c : change.getRemoved()){
                         mainJoueur.getChildren().remove(findCardView(mainJoueur,c));
+                    }
+                }
+            }
+        }
+    };
+
+    private  ListChangeListener<BlueCard> whenInplayIsUpdated = new ListChangeListener<BlueCard>() {
+        @Override
+        public void onChanged(Change<? extends BlueCard> change) {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Card c : change.getAddedSubList()) {
+                        inPlay.getChildren().add(new MyCardView(new ICard(c), MyPlayerArea.this));
+                    }
+                } else if (change.wasRemoved()) {
+                    for (Card c : change.getAddedSubList()) {
+                        inPlay.getChildren().remove(findCardView(inPlay, c));
                     }
                 }
             }
@@ -78,5 +99,9 @@ public class MyPlayerArea extends PlayerArea {
 
     public ImageView getCard() {
         return card;
+    }
+
+    public HBox getInPlayJoueur() {
+        return inPlay;
     }
 }
