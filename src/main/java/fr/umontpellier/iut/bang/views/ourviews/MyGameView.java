@@ -97,7 +97,7 @@ public class MyGameView extends GameView {
             p.getChildren().add(rectangleMain);
             p.getChildren().add(votreMain);
             p.getChildren().add(p.getMainJoueur());
-            p.getMainJoueur().setLayoutX(100);
+            p.getMainJoueur().setLayoutX(10);
             p.getMainJoueur().setLayoutY(100);
 
         }
@@ -227,6 +227,7 @@ public class MyGameView extends GameView {
         setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant cange faire
         setPassSelectedListener();
         getIGame().run();
+
     }
     private void lirePdfRegles(BangIHM bangIHM){
         File file = new File("src/main/resources/pdf/Bang-regles.pdf");

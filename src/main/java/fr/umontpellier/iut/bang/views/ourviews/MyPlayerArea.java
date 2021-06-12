@@ -19,6 +19,7 @@ public class MyPlayerArea extends PlayerArea {
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
         mainJoueur = new HBox();
+        mainJoueur.setSpacing(-25);
         nomDuJoueur = new Label(player.getName());
         setHandListener(whenHandIsUpdated);
     }

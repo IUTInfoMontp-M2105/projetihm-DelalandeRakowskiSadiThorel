@@ -7,13 +7,20 @@ import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class MyCardView extends CardView {
+    ImageView imageCarte = new ImageView();
     public MyCardView(ICard card, PlayerArea playerArea) {
         super(card, playerArea);
-        Label nomCarte = new Label(card.getName());
-        getChildren().add(nomCarte);
+        String name = card.getImageName();
+        imageCarte.setImage(new Image(name));
+        imageCarte.setPreserveRatio(true);
+        Label nomCarte = new Label(name);
+        imageCarte.setFitHeight(125);
+        getChildren().add(imageCarte);
         setCardSelectionListener();
     }
 
@@ -30,6 +37,10 @@ public class MyCardView extends CardView {
     @Override
     protected void setCardSelectionListener() {
         setOnMouseClicked(whenCardSelected);
+    }
+
+    public ImageView getImageCarte() {
+        return imageCarte;
     }
 
     private EventHandler<MouseEvent> whenCardSelected = mouseEvent -> {
