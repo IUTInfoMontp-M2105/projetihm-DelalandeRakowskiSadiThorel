@@ -21,20 +21,11 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique = new BorderPane();
         nomJoueur = new Label(playerArea.getPlayer().getName());
 
-        //HBox inGame = new HBox();
 
-        //playerArea.getChildren().add(inGame);
-        //inGame.setBorder(new Border(new BorderStroke(Color.BLACK,
-                //BorderStrokeStyle.SOLID,
-                //CornerRadii.EMPTY,new BorderWidths(1))));
         zoneClique.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
-        //inGame.setPrefHeight(100);
-        //inGame.setPrefWidth(300);
-        //inGame.setLayoutY(130);
-        //listJoueurPointer.add(playerArea);
-        //zoneClique.getChildren().add(playerArea);
+
         ImageView carteCharacter = playerArea.getCard();
         carteCharacter.setPreserveRatio(true);
         carteCharacter.setFitHeight(125);
@@ -45,8 +36,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         Label nomJoueur = new Label(playerArea.getPlayer().getName());
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);
-        //playerArea.getChildren().add(carteCharacter);
-        //playerArea.getChildren().add(nomJoueur);
+
         zoneClique.setPrefSize(400,100);
         zoneClique.setStyle("-fx-background-color: #816a6a");
         zoneClique.setCenter(nomJoueur);

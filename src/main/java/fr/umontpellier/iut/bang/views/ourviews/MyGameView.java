@@ -150,29 +150,7 @@ public class MyGameView extends GameView {
         List<Node> listJoueurPointer = new ArrayList<>();
         for (int i=0; i<4;i++){ // seulement 4 joueur changer 4 pour game.getPlayers().size() pour plus de joueur
             MyPlayerArea v = new MyPlayerArea(new IPlayer(game.getPlayers().get(i)),this);
-            /*HBox inGame = new HBox();
 
-            v.getChildren().add(inGame);
-            inGame.setBorder(new Border(new BorderStroke(Color.BLACK,
-                    BorderStrokeStyle.SOLID,
-                    CornerRadii.EMPTY,new BorderWidths(1))));
-            v.setBorder(new Border(new BorderStroke(Color.BLACK,
-                    BorderStrokeStyle.SOLID,
-                    CornerRadii.EMPTY,new BorderWidths(1))));
-            inGame.setPrefHeight(100);
-            inGame.setPrefWidth(300);
-            inGame.setLayoutY(130);
-            listJoueurPointer.add(v);
-            tout.getChildren().add(v);
-            ImageView carteCharacter = mains.get(i).getCard();
-            carteCharacter.setPreserveRatio(true);
-            carteCharacter.setFitHeight(125);
-            carteCharacter.setLayoutX(110);
-            Label nomJoueur = new Label(mains.get(i).getPlayer().getName());
-            nomJoueur.setLayoutX(118);
-            nomJoueur.setLayoutY(85);
-            v.getChildren().add(carteCharacter);
-            v.getChildren().add(nomJoueur);*/
             MyPlayerSelectionArea pA = new MyPlayerSelectionArea(v);
             listJoueurPointer.add(pA);
             tout.getChildren().add(pA);
