@@ -37,10 +37,10 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);
 
-        zoneClique.setPrefSize(400,100);
+        zoneClique.setPrefSize(300,200);
         zoneClique.setStyle("-fx-background-color: #816a6a");
         zoneClique.setCenter(nomJoueur);
-        zoneClique.setTop(carteCharacter);
+        zoneClique.setTop(h);
         this.getChildren().add(zoneClique);
         setPlayerSelectedListener();
 
