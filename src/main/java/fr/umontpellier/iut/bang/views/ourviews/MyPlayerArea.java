@@ -47,12 +47,12 @@ public class MyPlayerArea extends PlayerArea {
         return null;
     }
     @Override
-    public void highlightCurrentArea() {
+    public void highlightCurrentArea() {setStyle("-fx-background-color:lightblue");
 
     }
 
     @Override
     public void deHightlightCurrentArea() {
-
+        setStyle("-fx-background-color:transparent");
     }
 }

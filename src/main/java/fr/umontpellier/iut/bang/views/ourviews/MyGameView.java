@@ -8,6 +8,8 @@ import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.application.HostServices;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -88,7 +90,7 @@ public class MyGameView extends GameView {
             rectangleMain.setArcWidth(140);
             rectangleMain.setArcHeight(140);
             rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
-            Label votreMain = new Label("Votre Main :" );
+            Label votreMain = new Label("Votre Main :" +p); //enelver le +p quand ça marchera
             votreMain.setLayoutX(45);
             votreMain.setLayoutY(15);
             votreMain.setStyle("-fx-font-size: 20");
@@ -222,8 +224,8 @@ public class MyGameView extends GameView {
         setWidth(1500);
         setHeight(750);
         getChildren().add(tout);
+        setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant cange faire
         getIGame().run();
-        tout.getChildren().add(findPlayerArea(game.getCurrentPlayer()));// ajout de la main Joueur
     }
     private void lirePdfRegles(BangIHM bangIHM){
         File file = new File("src/main/resources/pdf/Bang-regles.pdf");
@@ -239,11 +241,9 @@ public class MyGameView extends GameView {
 
     @Override
     protected void setPassSelectedListener() {          // ça marche pas car current player ne change pas
-        System.out.println("t'as cliqué gros");
-        Player ancientCurrentPlayer = game.getCurrentPlayer();
+        System.out.println("Le joueur a Passé");
         buttonPasser.setOnAction(event -> getIGame().onPass());
-        tout.getChildren().remove(findPlayerArea(ancientCurrentPlayer));
-        tout.getChildren().add(findPlayerArea(game.getCurrentPlayer()));
+
 
     }
     private PlayerArea findPlayerArea(Player player) {
@@ -255,4 +255,14 @@ public class MyGameView extends GameView {
         }
         return null;
     }
+    private ChangeListener<? super Player> whenCurrentPlayerChanges = new ChangeListener<Player>() {
+        @Override
+        public void changed(ObservableValue<? extends Player> observableValue, Player oldplayer, Player newPlayer) {
+            System.out.println("le Joueur courrant à changé");
+            if(oldplayer!=null){
+                tout.getChildren().remove(findPlayerArea(oldplayer));
+            }
+            tout.getChildren().add(findPlayerArea(newPlayer));
+        }
+    };
 }
