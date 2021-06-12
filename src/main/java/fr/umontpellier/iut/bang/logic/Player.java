@@ -356,7 +356,7 @@ public class Player {
     }
 
     public boolean shouldDiscard() {
-        return getHand().size() > getHealthPoints();
+        return getHand().size() >getHealthPoints();
     }
 
     public void reactToBang() {

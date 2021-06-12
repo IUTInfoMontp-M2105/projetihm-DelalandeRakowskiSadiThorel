@@ -67,7 +67,9 @@ public class Game {
      * Méthode à appeler quand l'user choisit de passer
      */
     public void onPass() {
+        System.out.println("je suis état 1");
         if (isAttackInProgress()) {
+            System.out.println("je suis état 2");
             if (isTargetSelected()) {
                 Player attacker = getCurrentPlayer();
                 Player passingPlayer = getTargetPlayer();
@@ -80,7 +82,9 @@ public class Game {
             }
         }
         else {
+            System.out.println("je suis allé dans le else");
             if (getCurrentState() == GameState.CHOOSE_ACTION)
+                System.out.println("je suis état 3");
                 discardOrMoveNext();
         }
     }
