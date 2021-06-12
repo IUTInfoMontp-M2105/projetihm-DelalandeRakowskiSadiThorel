@@ -28,6 +28,7 @@ public class MyPlayerArea extends PlayerArea {
         mainJoueur = new HBox();
         inPlay=new HBox();
         inPlay.setSpacing(-25);
+        inPlay.setLayoutY(5);
         mainJoueur.setSpacing(-25);
         nomDuJoueur = new Label(player.getName());
         setHandListener(whenHandIsUpdated);
