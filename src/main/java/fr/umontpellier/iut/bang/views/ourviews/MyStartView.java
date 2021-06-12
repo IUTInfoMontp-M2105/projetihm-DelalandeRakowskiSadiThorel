@@ -210,10 +210,9 @@ public class MyStartView extends StartView {
      * Définit l'action à exécuter lorsque le nombre de participants change
      */
     private ChangeListener <String> whenNbPlayersChanged = new ChangeListener<String>() {
-        int nb = 4;
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String ancientNombre, String nouveauNombre) {
-            if(ancientNombre.compareTo(nouveauNombre)<0 && nb<8) {
+            if(ancientNombre.compareTo(nouveauNombre)<0 ) {
                 for (int i = getnbCourant(ancientNombre); i < getnbCourant(nouveauNombre); i++) {
                     Label j = new Label("J" + (i + 1));
                     TextField t = new TextField();
@@ -221,15 +220,14 @@ public class MyStartView extends StartView {
                     parametrePartie.add(j, 1, i);
                     parametrePartie.add(t, 2, i);
                     joueurs.add(t);
-                    nb+=1;
                 }
             }
-            /*else if(!nouveauNombre.isEmpty() && nb>4){
+            /*else if(!nouveauNombre.isEmpty()){
                 System.out.println("Je suis passer par là");
                 for (int i = 0; i< getnbCourant(ancientNombre) - getnbCourant(nouveauNombre) +1; i++) {
                         parametrePartie.getChildren().remove(1,getnbCourant(ancientNombre)-i); y'a un soucis avec remove clairement
                     parametrePartie.getChildren().remove(2, getnbCourant(ancientNombre)-i);
-                    nb-=1;
+
                 }
             }*/
         }
