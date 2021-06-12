@@ -90,12 +90,14 @@ public class MyGameView extends GameView {
             rectangleMain.setArcWidth(140);
             rectangleMain.setArcHeight(140);
             rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
-            Label votreMain = new Label("Votre Main :" +p); //enelver le +p quand ça marchera
+            Label votreMain = new Label("Votre Main :");
             votreMain.setLayoutX(45);
             votreMain.setLayoutY(15);
             votreMain.setStyle("-fx-font-size: 20");
             p.getChildren().add(rectangleMain);
             p.getChildren().add(votreMain);
+            p.getChildren().add(p.getMainJoueur());
+
         }
 
 
@@ -139,7 +141,7 @@ public class MyGameView extends GameView {
         buttonPasser.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         buttonPasser.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
         tout.getChildren().add(buttonPasser);
-        buttonPasser.setOnAction(event -> setPassSelectedListener());
+
 
 
 
@@ -225,6 +227,7 @@ public class MyGameView extends GameView {
         setHeight(750);
         getChildren().add(tout);
         setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant cange faire
+        setPassSelectedListener();
         getIGame().run();
     }
     private void lirePdfRegles(BangIHM bangIHM){
@@ -258,7 +261,7 @@ public class MyGameView extends GameView {
     private ChangeListener<? super Player> whenCurrentPlayerChanges = new ChangeListener<Player>() {
         @Override
         public void changed(ObservableValue<? extends Player> observableValue, Player oldplayer, Player newPlayer) {
-            System.out.println("le Joueur courrant à changé");
+            System.out.println("le Joueur courrant à changé"); // change la main du joueur pour celle du courant
             if(oldplayer!=null){
                 tout.getChildren().remove(findPlayerArea(oldplayer));
             }

@@ -15,10 +15,12 @@ import javafx.stage.Stage;
 
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
+    private Label nomDuJoueur;
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
         mainJoueur = new HBox();
-        getChildren().add(mainJoueur);
+        nomDuJoueur = new Label(player.getName());
+        setHandListener(whenHandIsUpdated);
     }
 
     private ListChangeListener<Card> whenHandIsUpdated = new ListChangeListener<Card>() {
@@ -54,5 +56,13 @@ public class MyPlayerArea extends PlayerArea {
     @Override
     public void deHightlightCurrentArea() {
         setStyle("-fx-background-color:transparent");
+    }
+
+    public Label getLabelName(){
+        return nomDuJoueur;
+    }
+
+    public HBox getMainJoueur() {
+        return mainJoueur;
     }
 }

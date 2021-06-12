@@ -8,4 +8,8 @@
 #but{
     -fx-background-color: rgba(217, 217, 217, .7);
     -fx-background-radius: 20,7,6;
+
+}
+#but:pressed{
+    -fx-background-color: rgba(150, 150, 150, .9);
 }
