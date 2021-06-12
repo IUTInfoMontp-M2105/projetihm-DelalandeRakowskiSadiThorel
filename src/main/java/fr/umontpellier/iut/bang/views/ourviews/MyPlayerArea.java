@@ -18,9 +18,11 @@ import javafx.stage.Stage;
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
     private Label nomDuJoueur;
+    private MyPlayerSelectionArea selection;
     ImageView card = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
+        selection = new MyPlayerSelectionArea(this);
         String cardCharacter = this.getImageCharacter(player.getPlayer());
         card.setImage(new Image(cardCharacter));
         mainJoueur = new HBox();
@@ -56,7 +58,8 @@ public class MyPlayerArea extends PlayerArea {
         return null;
     }
     @Override
-    public void highlightCurrentArea() {setStyle("-fx-background-color:lightblue");
+    public void highlightCurrentArea() {
+        setStyle("-fx-background-color:#8fa9ca");
 
     }
 

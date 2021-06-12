@@ -10,16 +10,18 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
 
     @Override
     public void setVisible() {
-
+        if(getPlayerArea().getPlayer().equals(getPlayerArea().getGameView().getIGame().getCurrentPlayer())){
+            getPlayerArea().highlightCurrentArea();
+        }else setUnVisible();
     }
 
     @Override
     public void setUnVisible() {
-
+        getPlayerArea().deHightlightCurrentArea();
     }
 
     @Override
     protected void setPlayerSelectedListener() {
-
+        getPlayerArea().getGameView().getIGame().onTargetSelection(getPlayerArea().getIPlayer());
     }
 }
