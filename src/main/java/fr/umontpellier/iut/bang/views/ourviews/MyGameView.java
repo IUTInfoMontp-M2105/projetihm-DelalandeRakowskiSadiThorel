@@ -5,16 +5,19 @@ import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.views.GameView;
 import javafx.application.HostServices;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyGameView extends GameView {
     Button buttonPasser;
@@ -120,7 +123,31 @@ public class MyGameView extends GameView {
 
 
 
-
+        //Emplacement pour les joueurs
+        List<Node> listJoueurPointer = new ArrayList<>();
+        for (int i=0; i<4;i++){ // seulement 4 joueur changer 4 pour game.getPlayers().size() pour plus de joueur
+            VBox v = new VBox();
+            Pane joueur = new Pane();
+            HBox inGame = new HBox();
+            v.getChildren().add(joueur);
+            v.getChildren().add(inGame);
+            listJoueurPointer.add(v);
+            v.setBorder(new Border(new BorderStroke(Color.BLACK,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,new BorderWidths(1))));
+            tout.getChildren().add(v);
+            v.setPrefHeight(225);
+            v.setPrefWidth(300);
+        }
+        System.out.println(listJoueurPointer);
+        listJoueurPointer.get(0).setLayoutX(425);
+        listJoueurPointer.get(0).setLayoutY(20);
+        listJoueurPointer.get(1).setLayoutX(425);
+        listJoueurPointer.get(1).setLayoutY(475);
+        listJoueurPointer.get(2).setLayoutX(100); // c'est seulement pour l'instant (prévoit que 4 joueur)
+        listJoueurPointer.get(2).setLayoutY(250); // c'est dégueux d'ailleurs
+        listJoueurPointer.get(3).setLayoutX(750);
+        listJoueurPointer.get(3).setLayoutY(250);
 
 
 
