@@ -10,6 +10,8 @@ import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.application.HostServices;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -36,7 +38,6 @@ public class MyGameView extends GameView {
         super(game);
         this.game=game;
         this.bangIHM=bangIHM;
-
 
         //initialisation main joueur
         for (Player p : game.getPlayers()) {
@@ -149,7 +150,7 @@ public class MyGameView extends GameView {
         List<Node> listJoueurPointer = new ArrayList<>();
         for (int i=0; i<4;i++){ // seulement 4 joueur changer 4 pour game.getPlayers().size() pour plus de joueur
             MyPlayerArea v = new MyPlayerArea(new IPlayer(game.getPlayers().get(i)),this);
-            HBox inGame = new HBox();
+            /*HBox inGame = new HBox();
 
             v.getChildren().add(inGame);
             inGame.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -171,7 +172,11 @@ public class MyGameView extends GameView {
             nomJoueur.setLayoutX(118);
             nomJoueur.setLayoutY(85);
             v.getChildren().add(carteCharacter);
-            v.getChildren().add(nomJoueur);
+            v.getChildren().add(nomJoueur);*/
+            MyPlayerSelectionArea pA = new MyPlayerSelectionArea(v);
+            listJoueurPointer.add(pA);
+            tout.getChildren().add(pA);
+
         }
         listJoueurPointer.get(0).setLayoutX(425);
         listJoueurPointer.get(0).setLayoutY(20);
@@ -279,4 +284,9 @@ public class MyGameView extends GameView {
             tout.getChildren().add(findPlayerArea(newPlayer));
         }
     };
+
+    /**
+     * Pour définir l'action à exécuter lorsqu'une carte d'attaque vient d'être jouée
+     */
+
 }
