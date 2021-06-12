@@ -90,13 +90,15 @@ public class MyGameView extends GameView {
             rectangleMain.setArcWidth(140);
             rectangleMain.setArcHeight(140);
             rectangleMain.setFill(Color.rgb(217, 217, 217, 0.7));
-            Label votreMain = new Label("Votre Main :");
+            Label votreMain = new Label("Votre Main "+p.getPlayer().getName()+" :");
             votreMain.setLayoutX(45);
             votreMain.setLayoutY(15);
             votreMain.setStyle("-fx-font-size: 20");
             p.getChildren().add(rectangleMain);
             p.getChildren().add(votreMain);
             p.getChildren().add(p.getMainJoueur());
+            p.getMainJoueur().setLayoutX(100);
+            p.getMainJoueur().setLayoutY(100);
 
         }
 
@@ -141,10 +143,6 @@ public class MyGameView extends GameView {
         buttonPasser.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         buttonPasser.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
         tout.getChildren().add(buttonPasser);
-
-
-
-
 
 
         //Emplacement pour les joueurs
@@ -244,7 +242,6 @@ public class MyGameView extends GameView {
 
     @Override
     protected void setPassSelectedListener() {          // ça marche pas car current player ne change pas
-        System.out.println("Le joueur a Passé");
         buttonPasser.setOnAction(event -> getIGame().onPass());
 
 
