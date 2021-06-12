@@ -160,7 +160,11 @@ public class MyGameView extends GameView {
             tout.getChildren().add(v);
             v.setPrefHeight(225);
             v.setPrefWidth(300);
-            joueur.getChildren().add(mains.get(i).getCard());
+            ImageView carteCharacter = mains.get(i).getCard();
+            carteCharacter.setPreserveRatio(true);
+            carteCharacter.setFitHeight(125);
+            carteCharacter.setLayoutX(110);
+            joueur.getChildren().add(carteCharacter);
         }
         listJoueurPointer.get(0).setLayoutX(425);
         listJoueurPointer.get(0).setLayoutY(20);
