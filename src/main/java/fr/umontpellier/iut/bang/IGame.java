@@ -167,5 +167,7 @@ public class IGame {
         return game.canDrawPileBeSelectedProperty();
     }
 
-
+    public List<Player> getPossibleTargets(){
+        return game.getPossibleTargets();
+    }
 }
