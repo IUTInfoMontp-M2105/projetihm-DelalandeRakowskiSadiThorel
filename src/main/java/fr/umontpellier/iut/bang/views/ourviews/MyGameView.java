@@ -4,6 +4,8 @@ import fr.umontpellier.iut.bang.BangIHM;
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.Game;
+import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
@@ -33,6 +35,7 @@ public class MyGameView extends GameView {
     List<MyPlayerArea> mains = new ArrayList<>();
     IGame game;
     BangIHM bangIHM;
+    Label currentState = new Label();
 
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
@@ -217,12 +220,24 @@ public class MyGameView extends GameView {
         defausse.getChildren().add(defaussec); // exemple card
 
 
+        //Label Current State
+        currentState.setLayoutX(1100);
+        currentState.setLayoutY(250);
+        currentState.setMaxHeight(50);
+        currentState.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
+        tout.getChildren().add(currentState);
+        setCurrentStateChangesListener(whenCurrentStateChanges);
+
+
         setWidth(1500);
         setHeight(750);
         getChildren().add(tout);
         setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant cange faire
         setPassSelectedListener();
         getIGame().run();
+
+        currentState.setText(game.getCurrentPlayer().getName() + " Choose card to play"); // texte initiale de currentState
+
 
     }
     private void lirePdfRegles(BangIHM bangIHM){
@@ -262,6 +277,14 @@ public class MyGameView extends GameView {
             tout.getChildren().add(findPlayerArea(newPlayer));
         }
     };
+
+
+   private ChangeListener<GameState> whenCurrentStateChanges = new ChangeListener<GameState>() {
+       @Override
+       public void changed(ObservableValue<? extends GameState> observableValue, GameState gameState, GameState t1) {
+           currentState.setText(t1.toString());
+       }
+   };
 
     /**
      * Pour définir l'action à exécuter lorsqu'une carte d'attaque vient d'être jouée

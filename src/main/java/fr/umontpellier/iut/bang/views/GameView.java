@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.bang.views;
 
 import fr.umontpellier.iut.bang.IGame;
+import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import javafx.beans.value.ChangeListener;
@@ -53,6 +54,10 @@ public abstract class GameView extends Pane {
      */
     protected void setCurrentAttackChangesListener(ChangeListener<? super Card> whenCurrentAttackChanges) {
         game.currentAttackProperty().addListener(whenCurrentAttackChanges);
+    }
+
+    protected void setCurrentStateChangesListener(ChangeListener<? super GameState> whenCurrentStateChanges) {
+        game.currentStateProperty().addListener(whenCurrentStateChanges);
     }
 
 }

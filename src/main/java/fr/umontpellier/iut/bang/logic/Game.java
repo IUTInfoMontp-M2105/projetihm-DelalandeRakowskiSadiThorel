@@ -665,4 +665,6 @@ public class Game {
     public List<Card> getNextPossibleCards() {
         return nextPossibleCards;
     }
+
+
 }
