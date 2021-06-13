@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPlayerArea extends PlayerArea {
@@ -91,6 +92,7 @@ public class MyPlayerArea extends PlayerArea {
         @Override
         public void onChanged(Change<? extends BlueCard> change) {
             while (change.next()) {
+                HBox monInPlay = inPlay;
                 if (change.wasAdded()) {
                     for (Card c : change.getAddedSubList()) {
                         inPlay.getChildren().add(new MyCardView(new ICard(c), MyPlayerArea.this));
@@ -98,8 +100,10 @@ public class MyPlayerArea extends PlayerArea {
                 } else if (change.wasRemoved()) {
                     System.out.println("wow un remove!!");
                     for (Card c : change.getRemoved()) {
-                        System.out.println(c.toString());
                         inPlay.getChildren().clear();
+                    }
+                    for (Node n : monInPlay.getChildren()) {
+                        inPlay.getChildren().add(n);
                     }
                 }
             }
@@ -114,10 +118,6 @@ public class MyPlayerArea extends PlayerArea {
         }
     };
 
-    /*ageProperty().addListener((ObservableValue<? extends Number > observable, Number oldValue, Number newValue) -> {
-  [...]
-    });*/
-
     private ChangeListener <Number> whenHealthPointsIsUpdated = new ChangeListener<Number>() {
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number ancientNumber, Number newNumber) {
@@ -130,7 +130,6 @@ public class MyPlayerArea extends PlayerArea {
                 health.getChildren().add(newNumber.intValue(), pointEnMoins);
             }
             if (dif < 0) { // gagne
-                System.out.println("je passe par ici mon reuf");
                 health.getChildren().remove(ancientNumber.intValue());
                 ImageView pointEnPlus = new ImageView("src/main/resources/images/bullet.png");
                 pointEnPlus.setPreserveRatio(true);
