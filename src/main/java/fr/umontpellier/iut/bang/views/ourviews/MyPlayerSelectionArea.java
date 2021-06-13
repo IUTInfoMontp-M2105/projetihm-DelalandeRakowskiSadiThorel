@@ -23,6 +23,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private ImageView role;
     private Image r;
     private VBox health;
+    private Pane gun;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
 
         super(playerArea);
@@ -30,6 +31,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         nomJoueur = new Label(playerArea.getPlayer().getName());
         inPlay=playerArea.getInPlayJoueur();
         health=playerArea.getHealth();
+        gun=playerArea.getGun();
         HBox triche = new HBox(); // triche permet un espace entre la carte Charactere et les cartes inplay
         triche.setMinHeight(5);
         triche.setMaxHeight(5); // inutile mais principalement pour éviter les problèmes
@@ -53,16 +55,25 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         carteCharacter.setFitHeight(125);
         carteCharacter.setLayoutX(110);
         Pane h = new Pane();
+        BorderPane règleproblème = new BorderPane(); // j'arrive pas a ajouter bien les points de vie donc je crée ça
+        règleproblème.setLayoutX(100);
+        règleproblème.setCenter(health);
+        BorderPane gunRègleProblème = new BorderPane();
+        gunRègleProblème.setLayoutX(75);
+        gunRègleProblème.setLayoutY(40);
+        gunRègleProblème.setCenter(gun);
         h.getChildren().add(role);
         h.getChildren().add(carteCharacter);
         h.getChildren().add(nomJoueur);
+        h.getChildren().add(gunRègleProblème);
+        h.getChildren().add(règleproblème);
 
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);
         zoneClique.setPrefSize(300,200);
         zoneClique.setTop(h);
         zoneClique.setCenter(triche);
-        zoneClique.setLeft(health); // faut changer wola mais j'y arrive pas
+        /*zoneClique.setLeft(health);*/ // faut changer wola mais j'y arrive pas
         zoneClique.setBottom(inPlay);
         setPlayerSelectedListener();
         this.getChildren().add(zoneClique);

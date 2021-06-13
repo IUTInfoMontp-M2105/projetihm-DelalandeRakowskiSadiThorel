@@ -25,6 +25,7 @@ public class MyPlayerArea extends PlayerArea {
     private HBox inPlay;
     private VBox health;
     private MyPlayerSelectionArea selection;
+    private Pane gun;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
@@ -52,6 +53,11 @@ public class MyPlayerArea extends PlayerArea {
             vie.setFitHeight(15);
             health.getChildren().add(vie);
         }
+        gun=new Pane();
+        ImageView gunImg = new ImageView("src/main/resources/images/cards/colt45_1H.png");
+        gunImg.setPreserveRatio(true);
+        gunImg.setFitHeight(85);
+        gun.getChildren().add(gunImg);
 
         setHandListener(whenHandIsUpdated);
         setInPlayListener(whenInplayIsUpdated);
@@ -162,5 +168,9 @@ public class MyPlayerArea extends PlayerArea {
 
     public VBox getHealth() {
         return health;
+    }
+
+    public Pane getGun() {
+        return gun;
     }
 }
