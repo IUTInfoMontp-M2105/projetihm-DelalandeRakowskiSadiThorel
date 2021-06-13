@@ -170,4 +170,8 @@ public class IGame {
     public List<Player> getPossibleTargets(){
         return game.getPossibleTargets();
     }
+
+    public Game getGame() {
+        return game;
+    }
 }
