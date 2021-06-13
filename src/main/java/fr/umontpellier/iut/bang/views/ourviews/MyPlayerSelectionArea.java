@@ -23,7 +23,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private ImageView role;
     private Image r;
     private VBox health;
-    private ImageView gun;
+    private MyCardView gun;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
 
         super(playerArea);
@@ -65,8 +65,8 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         h.getChildren().add(role);
         h.getChildren().add(carteCharacter);
         h.getChildren().add(nomJoueur);
-        h.getChildren().add(gunRègleProblème);
         h.getChildren().add(règleproblème);
+        h.getChildren().add(gunRègleProblème);
 
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);

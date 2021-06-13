@@ -4,6 +4,7 @@ import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.cards.BlueCard;
 import fr.umontpellier.iut.bang.logic.cards.Card;
+import fr.umontpellier.iut.bang.logic.cards.Colt;
 import fr.umontpellier.iut.bang.logic.cards.WeaponCard;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.GameView;
@@ -26,7 +27,7 @@ public class MyPlayerArea extends PlayerArea {
     private HBox inPlay;
     private VBox health;
     private MyPlayerSelectionArea selection;
-    private ImageView gun;
+    private MyCardView gun;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
@@ -54,9 +55,9 @@ public class MyPlayerArea extends PlayerArea {
             vie.setFitHeight(15);
             health.getChildren().add(vie);
         }
-        gun = new ImageView("src/main/resources/images/cards/colt45_1H.png");
-        gun.setPreserveRatio(true);
-        gun.setFitHeight(85);
+        gun = new MyCardView(new ICard(new Colt()),this);
+        gun.imageCarte.setPreserveRatio(true);
+        gun.imageCarte.setFitHeight(85);
 
 
         setHandListener(whenHandIsUpdated);
@@ -103,9 +104,7 @@ public class MyPlayerArea extends PlayerArea {
     private ChangeListener<WeaponCard> whenWeaponChanges = new ChangeListener<WeaponCard>() {
         @Override
         public void changed(ObservableValue<? extends WeaponCard> observableValue, WeaponCard weaponCard, WeaponCard t1) {
-            gun.setImage(new Image (t1.getImageName()));
-            gun.setPreserveRatio(true);
-            gun.setFitHeight(85);
+            gun.imageCarte.setImage(new Image (t1.getImageName()));
         }
     };
 
@@ -179,7 +178,7 @@ public class MyPlayerArea extends PlayerArea {
         return health;
     }
 
-    public ImageView getGun() {
+    public MyCardView getGun() {
         return gun;
     }
 }
