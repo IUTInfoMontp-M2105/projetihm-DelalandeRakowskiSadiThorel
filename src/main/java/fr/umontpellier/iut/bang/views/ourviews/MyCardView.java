@@ -3,6 +3,7 @@ package fr.umontpellier.iut.bang.views.ourviews;
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.event.EventHandler;
@@ -12,10 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class MyCardView extends CardView {
-    ImageView imageCarte = new ImageView();
+    ImageView imageCarte;
     private MyPlayerArea playerArea;
     public MyCardView(ICard card, MyPlayerArea playerArea) {
         super(card, playerArea);
+        imageCarte = new ImageView();
         this.playerArea = playerArea;
         String name = card.getImageName();
         imageCarte.setImage(new Image(name));
@@ -33,7 +35,7 @@ public class MyCardView extends CardView {
 
     @Override
     public void setUnVisible() {
-
+        imageCarte.setImage(CardView.getBack());
     }
 
     @Override

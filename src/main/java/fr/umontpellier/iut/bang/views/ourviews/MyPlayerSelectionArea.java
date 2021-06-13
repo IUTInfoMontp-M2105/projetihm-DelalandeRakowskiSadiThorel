@@ -1,14 +1,17 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
+import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.logic.Role;
+import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import fr.umontpellier.iut.bang.views.PlayerSelectionArea;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +19,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private BorderPane zoneClique;
@@ -25,12 +31,16 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private Image r;
     private VBox health;
     private MyCardView gun;
-    private PlayerArea playerArea;
+    private MyPlayerArea playerArea;
     private Rectangle rectangle;
     private Rectangle dead;
+    //private Button useMissed;
+
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
         super(playerArea);
+
         this.playerArea = playerArea;
+
         zoneClique = new BorderPane();
         nomJoueur = new Label(playerArea.getPlayer().getName());
         inPlay=playerArea.getInPlayJoueur();
@@ -48,6 +58,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
         zoneClique.setStyle("-fx-background-color: White");*/
+
         r = new Image(playerArea.getImageRole(playerArea.getPlayer()));
         ImageView carteCharacter = playerArea.getCard();
         role = new ImageView(r);
@@ -82,6 +93,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique.setCenter(triche);
         /*zoneClique.setLeft(health);*/ // faut changer wola mais j'y arrive pas
         zoneClique.setBottom(inPlay);
+
         setPlayerSelectedListener();
         this.getChildren().add(zoneClique);
 
@@ -116,7 +128,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         IPlayer playerSelect = getPlayerArea().getIPlayer();
         IGame currentGame = getPlayerArea().getGameView().getIGame();
         currentGame.onTargetSelection(playerSelect);
-        Player p = playerSelect.getPlayer();
+
 
     };
 
@@ -145,5 +157,13 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     }
 
 
+
+   /* public void setBouttonMissed(Button useMissed){
+        this.useMissed = useMissed;
+        getChildren().add(this.useMissed);
+    }
+    public void removeMissed(){
+        getChildren().remove(useMissed);
+    }*/
 
 }
