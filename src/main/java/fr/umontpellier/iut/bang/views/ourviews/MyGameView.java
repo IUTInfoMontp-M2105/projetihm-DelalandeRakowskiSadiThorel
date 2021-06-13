@@ -181,7 +181,7 @@ public class MyGameView extends GameView {
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
         emplacementPioche.setLayoutX(460);
-        emplacementPioche.setLayoutY(270);
+        emplacementPioche.setLayoutY(260);
         emplacementPioche.setPrefHeight(180);
         emplacementPioche.setPrefWidth(100);
         tout.getChildren().add(emplacementPioche);
@@ -206,7 +206,7 @@ public class MyGameView extends GameView {
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
         emplacementDefausse.setLayoutX(585);
-        emplacementDefausse.setLayoutY(270);
+        emplacementDefausse.setLayoutY(260);
         emplacementDefausse.setPrefHeight(180);
         emplacementDefausse.setPrefWidth(100);
         tout.getChildren().add(emplacementDefausse);
