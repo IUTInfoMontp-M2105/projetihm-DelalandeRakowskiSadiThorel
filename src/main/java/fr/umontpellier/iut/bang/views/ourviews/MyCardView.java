@@ -3,6 +3,7 @@ package fr.umontpellier.iut.bang.views.ourviews;
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
@@ -54,6 +55,8 @@ public class MyCardView extends CardView {
         IPlayer targetPlayer = selectedCardView.getPlayerArea().getIPlayer();
         currentGame.onCardSelection(selectedCard, targetPlayer);
         if(!getCard().getCouleur().equals("B")){
+            playerArea.getMyGameView().setHautDefosse(getCard());
+        }else if(playerArea.getMyGameView().getIGame().getGame().getCurrentState().equals(GameState.DISCARD)){
             playerArea.getMyGameView().setHautDefosse(getCard());
         }
     };
