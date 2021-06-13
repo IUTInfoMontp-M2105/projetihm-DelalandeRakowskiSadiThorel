@@ -7,6 +7,8 @@ import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
@@ -42,7 +46,7 @@ public class MyPlayerArea extends PlayerArea {
         nomDuJoueur = new Label(player.getName());
 
         health=new VBox();
-        for (int i = 1; i<=player.getHealthPoints();i++){
+        for (int i = 0; i<player.getHealthPoints();i++){
             ImageView vie = new ImageView("src/main/resources/images/bullet.png");
             vie.setPreserveRatio(true);
             vie.setFitHeight(15);
@@ -51,6 +55,7 @@ public class MyPlayerArea extends PlayerArea {
 
         setHandListener(whenHandIsUpdated);
         setInPlayListener(whenInplayIsUpdated);
+        setHealthPointsListener(whenHealthPointsIsUpdated);
 
     }
 
@@ -88,6 +93,33 @@ public class MyPlayerArea extends PlayerArea {
             }
         }
     };
+
+    private ChangeListener <Number> whenHealthPointsIsUpdated = new ChangeListener<Number>() {
+        @Override
+        public void changed(ObservableValue<? extends Number> observableValue, Number ancientNumber, Number newNumber) {
+            int dif = ancientNumber.intValue() - newNumber.intValue();
+            if (dif > 0) {
+                for (int i = 0; i <dif; i++) {
+                    health.getChildren().remove(i);
+                    ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
+                    pointEnMoins.setPreserveRatio(true);
+                    pointEnMoins.setFitHeight(15);
+                    health.getChildren().add(i,pointEnMoins);
+                }
+            }
+            if (dif < 0) {
+                System.out.println("je passe par ici mon reuf");
+                for (int i = 0; i > dif; i--) {
+                    health.getChildren().remove(i);
+                    ImageView pointEnPlus = new ImageView("src/main/resources/images/bullet.png");
+                    pointEnPlus.setPreserveRatio(true);
+                    pointEnPlus.setFitHeight(15);
+                    health.getChildren().add(i,pointEnPlus);
+                }
+            }
+        }
+    } ;
+
     private CardView findCardView(HBox container, Card card) {
         for (Node n : container.getChildren()) {
             CardView nodeCardView = (CardView) n;

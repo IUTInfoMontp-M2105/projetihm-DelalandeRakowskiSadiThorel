@@ -62,6 +62,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique.setPrefSize(300,200);
         zoneClique.setTop(h);
         zoneClique.setCenter(triche);
+        zoneClique.setLeft(health); // faut changer wola mais j'y arrive pas
         zoneClique.setBottom(inPlay);
         setPlayerSelectedListener();
         this.getChildren().add(zoneClique);
@@ -92,4 +93,6 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         Player p = playerSelect.getPlayer();
 
     };
+
+
 }
