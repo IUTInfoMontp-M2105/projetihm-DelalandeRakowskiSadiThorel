@@ -103,6 +103,14 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique.setOnMouseClicked(playerSelected);
     }
 
+    //Mettre en couleur les joueurs que je peux cibler
+    /* public void setOtherPlayerArea(MyGameView myGameView) {
+        for (Player p :getPlayerArea().getPlayer().getPlayersInRange(getPlayerArea().getPlayer().getWeaponRange())){
+            myGameView.findPlayerArea(p).highlightCurrentArea();
+            if (myGameView.game.getCurrentPlayer().)
+        }
+
+    }*/
     private EventHandler<MouseEvent> playerSelected = event ->{
         IPlayer playerSelect = getPlayerArea().getIPlayer();
         IGame currentGame = getPlayerArea().getGameView().getIGame();
