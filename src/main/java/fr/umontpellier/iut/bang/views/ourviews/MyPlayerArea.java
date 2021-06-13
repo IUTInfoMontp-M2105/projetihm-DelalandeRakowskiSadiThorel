@@ -102,9 +102,7 @@ public class MyPlayerArea extends PlayerArea {
                     for (Card c : change.getRemoved()) {
                         inPlay.getChildren().clear();
                     }
-                    for (Node n : monInPlay.getChildren()) {
-                        inPlay.getChildren().add(n);
-                    }
+                    inPlay.getChildren().addAll(monInPlay.getChildren());
                 }
             }
         }
