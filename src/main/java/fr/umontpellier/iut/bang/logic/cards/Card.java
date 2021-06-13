@@ -22,6 +22,8 @@ public abstract class Card {
         this.suit = suit;
     }
 
+    public  abstract String getCouleur();
+
     public String getName() {
         return name;
     }

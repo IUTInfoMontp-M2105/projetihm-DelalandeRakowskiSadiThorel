@@ -331,7 +331,7 @@ public class MyGameView extends GameView {
         public void changed(ObservableValue<? extends Card> observableValue, Card oldCard, Card newCard) {
             if(newCard !=null){
                 System.out.println("je rentre dans l'attaque");
-                setHautDefosse(newCard);
+                //setHautDefosse(newCard);
                 /*for (MyPlayerSelectionArea myPlayerSelectionArea : joueursArea) {
                     System.out.println(getIGame().getPossibleTargets());
                     if (getIGame().getPossibleTargets().contains(myPlayerSelectionArea.getPlayerArea().getPlayer())) {

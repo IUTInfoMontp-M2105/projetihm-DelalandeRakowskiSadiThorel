@@ -8,6 +8,8 @@ public abstract class OrangeCard extends Card {
     }
 
     @Override
+    public  String getCouleur(){return "O";}
+    @Override
     public boolean canPlayFromHand(Player player) {
         return true;
     }
