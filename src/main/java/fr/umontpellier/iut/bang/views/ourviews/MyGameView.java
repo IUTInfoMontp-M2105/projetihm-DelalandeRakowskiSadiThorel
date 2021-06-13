@@ -7,6 +7,7 @@ import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.Game;
 import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.application.HostServices;
@@ -289,5 +290,11 @@ public class MyGameView extends GameView {
     /**
      * Pour définir l'action à exécuter lorsqu'une carte d'attaque vient d'être jouée
      */
+    private ChangeListener<Card> currentAttackChangesListener = new ChangeListener<Card>() {
+        @Override
+        public void changed(ObservableValue<? extends Card> observableValue, Card card, Card t1) {
+
+        }
+    };
 
 }

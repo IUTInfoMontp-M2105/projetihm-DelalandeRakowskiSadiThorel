@@ -2,11 +2,15 @@ package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.IGame;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.logic.Role;
+import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import fr.umontpellier.iut.bang.views.PlayerSelectionArea;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -16,6 +20,8 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private BorderPane zoneClique;
     private Label nomJoueur;
     private HBox inPlay;
+    private ImageView role;
+    private Image r;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
 
         super(playerArea);
@@ -32,43 +38,47 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
         zoneClique.setStyle("-fx-background-color: White");*/
-
+        r = new Image(playerArea.getImageRole(playerArea.getPlayer()));
         ImageView carteCharacter = playerArea.getCard();
-        ImageView carteRole = playerArea.getCardRole();
-        carteRole.setPreserveRatio(true);
-        carteRole.setFitHeight(125);
-        carteRole.setLayoutX(155);
-        carteRole.setLayoutY(10);
-        carteRole.setRotate(30);
+        role = new ImageView();
+        role.setPreserveRatio(true);
+        role.setFitHeight(125);
+        role.setLayoutX(155);
+        role.setLayoutY(10);
+        role.setRotate(30);
+        setVisible();
         carteCharacter.setPreserveRatio(true);
         carteCharacter.setFitHeight(125);
         carteCharacter.setLayoutX(110);
         Pane h = new Pane();
-        h.getChildren().add(carteRole);
+        h.getChildren().add(role);
         h.getChildren().add(carteCharacter);
         h.getChildren().add(nomJoueur);
 
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);
-
+        HBox l = new HBox();
+        l.getChildren().add(role);
         zoneClique.setPrefSize(300,200);
         zoneClique.setTop(h);
+        zoneClique.setLeft(l);
         zoneClique.setCenter(triche);
         zoneClique.setBottom(inPlay);
-        this.getChildren().add(zoneClique);
         setPlayerSelectedListener();
+        this.getChildren().add(zoneClique);
+
     }
 
     @Override
     public void setVisible() {
-        if(getPlayerArea().getPlayer().equals(getPlayerArea().getGameView().getIGame().getCurrentPlayer())){
-            getPlayerArea().highlightCurrentArea();
-        }else setUnVisible();
+        if(getPlayerArea().getIPlayer().getRole() != Role.SHERIFF){
+            role.setImage(CardView.getBack());
+        }else{setUnVisible();}
     }
 
     @Override
     public void setUnVisible() {
-        getPlayerArea().deHightlightCurrentArea();
+        role.setImage(r);
     }
 
     @Override
@@ -80,6 +90,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         IPlayer playerSelect = getPlayerArea().getIPlayer();
         IGame currentGame = getPlayerArea().getGameView().getIGame();
         currentGame.onTargetSelection(playerSelect);
-        System.out.println(this.getPlayerArea().getPlayer().getName()+"viiissssse" + playerSelect.getName());
+        Player p = playerSelect.getPlayer();
+
     };
 }
