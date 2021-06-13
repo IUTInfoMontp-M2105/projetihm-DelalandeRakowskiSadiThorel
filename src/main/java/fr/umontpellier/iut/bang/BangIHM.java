@@ -76,7 +76,7 @@ public class BangIHM extends Application {
     /**
      * Pour instancier la vue de fin de partie
      */
-    private void initResultView() {
+    public void initResultView() {
         resultsView = new MyResultView(this);
     }
 

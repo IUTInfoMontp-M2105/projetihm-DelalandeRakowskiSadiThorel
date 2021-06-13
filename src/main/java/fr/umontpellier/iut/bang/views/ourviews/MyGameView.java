@@ -7,6 +7,7 @@ import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.Game;
 import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.logic.Role;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
@@ -16,6 +17,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -40,6 +42,9 @@ public class MyGameView extends GameView {
     BangIHM bangIHM;
     Label currentState = new Label();
     List<MyPlayerSelectionArea> joueursArea;
+    private HBox fin;
+    private HBox boxFin;
+    private Button buttonFin;
 
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
@@ -235,6 +240,7 @@ public class MyGameView extends GameView {
         setCurrentStateChangesListener(whenCurrentStateChanges);
 
 
+        setRemoveFinJeuListener(finJeuListener);
         setRemoveDeadPlayerAreaListener(deadPlayerAreaListener);
         setWidth(1500);
         setHeight(750);
@@ -369,5 +375,33 @@ public class MyGameView extends GameView {
 
         return findPlayerArea(courante.getGameView().getIGame().getCurrentPlayer());
     }
+
+    private ListChangeListener<Player> finJeuListener = new ListChangeListener<Player>() {
+        @Override
+        public void onChanged(Change<? extends Player> change) {
+            while(change.next()){
+                if(change.wasRemoved()){
+                }
+                buttonFin = new Button("Fin du Jeu !");
+                buttonFin.setOnAction(event -> bangIHM.initResultView());
+                buttonFin.setPrefWidth(150.0);
+                buttonFin.setPrefHeight(50.0);
+                buttonFin.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 40));
+                buttonFin.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
+
+                boxFin = new HBox(50);
+                boxFin.getChildren().add(buttonFin);
+                boxFin.setAlignment(Pos.CENTER);
+                boxFin.setPadding(new Insets(0,0,25,0));
+
+                for (Player p : change.getRemoved()){
+                    if (p.getRole() == Role.SHERIFF){
+                        tout.getChildren().add(buttonFin);
+                    }
+
+                }
+            }
+        }
+    };
 
 }

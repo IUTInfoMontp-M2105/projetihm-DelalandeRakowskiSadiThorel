@@ -2,6 +2,8 @@ package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IPlayer;
+import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.logic.Role;
 import fr.umontpellier.iut.bang.logic.cards.BlueCard;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.logic.cards.Colt;
@@ -12,12 +14,17 @@ import fr.umontpellier.iut.bang.views.PlayerArea;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +36,8 @@ public class MyPlayerArea extends PlayerArea {
     private VBox health;
     private MyPlayerSelectionArea selection;
     private MyCardView gun;
+
+
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
 
@@ -88,6 +97,9 @@ public class MyPlayerArea extends PlayerArea {
         }
     };
 
+
+
+
     private  ListChangeListener<BlueCard> whenInplayIsUpdated = new ListChangeListener<BlueCard>() {
         @Override
         public void onChanged(Change<? extends BlueCard> change) {
@@ -120,12 +132,15 @@ public class MyPlayerArea extends PlayerArea {
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number ancientNumber, Number newNumber) {
             int dif = ancientNumber.intValue() - newNumber.intValue();
+            System.out.println(getHealth());
             if (dif ==1) { // perd
                 health.getChildren().remove(newNumber.intValue());
                 ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
                 pointEnMoins.setPreserveRatio(true);
                 pointEnMoins.setFitHeight(15);
                 health.getChildren().add(newNumber.intValue(), pointEnMoins);
+                System.out.println(getHealth());
+
             }
             if (dif < 0) { // gagne
                 health.getChildren().remove(ancientNumber.intValue());

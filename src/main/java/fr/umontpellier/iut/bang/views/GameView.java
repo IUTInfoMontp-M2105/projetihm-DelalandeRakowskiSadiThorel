@@ -60,4 +60,9 @@ public abstract class GameView extends Pane {
         game.currentStateProperty().addListener(whenCurrentStateChanges);
     }
 
+    protected void setRemoveFinJeuListener(ListChangeListener<Player> whenFinJeuListener) {
+        game.playersProperty().addListener(whenFinJeuListener);
+    }
+
+
 }
