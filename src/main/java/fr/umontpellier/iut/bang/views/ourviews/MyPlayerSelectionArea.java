@@ -82,7 +82,13 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
 
     @Override
     public void setVisible() {
-        if(getPlayerArea().getIPlayer().getRole() != Role.SHERIFF){
+        if(getPlayerArea().getGameView().getIGame().getCurrentPlayer() !=null){
+            if(getPlayerArea().getGameView().getIGame().getCurrentPlayer().equals(getPlayerArea().getPlayer())){
+                setUnVisible();
+            }
+        }
+
+        else if(getPlayerArea().getIPlayer().getRole() != Role.SHERIFF ){
             role.setImage(CardView.getBack());
         }else{setUnVisible();}
     }
