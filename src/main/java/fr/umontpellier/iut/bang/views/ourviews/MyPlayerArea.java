@@ -31,9 +31,11 @@ public class MyPlayerArea extends PlayerArea {
     private MyCardView gun;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
+    private MyGameView gameView;
 
-    public MyPlayerArea(IPlayer player, GameView gameView) {
+    public MyPlayerArea(IPlayer player, MyGameView gameView) {
         super(player, gameView);
+        this.gameView = gameView;
         selection = new MyPlayerSelectionArea(this);
         String cardCharacter = this.getImageCharacter(player.getPlayer());
         String cardRoleString = this.getImageRole(player.getPlayer());
@@ -196,5 +198,9 @@ public class MyPlayerArea extends PlayerArea {
 
     public MyPlayerSelectionArea getSelection() {
         return selection;
+    }
+
+    public MyGameView getMyGameView() {
+        return gameView;
     }
 }

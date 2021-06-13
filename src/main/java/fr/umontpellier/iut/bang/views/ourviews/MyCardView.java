@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 
 public class MyCardView extends CardView {
     ImageView imageCarte = new ImageView();
-    public MyCardView(ICard card, PlayerArea playerArea) {
+    public MyCardView(ICard card, MyPlayerArea playerArea) {
         super(card, playerArea);
         String name = card.getImageName();
         imageCarte.setImage(new Image(name));

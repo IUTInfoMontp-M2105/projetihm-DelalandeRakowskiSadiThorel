@@ -8,6 +8,7 @@ import fr.umontpellier.iut.bang.logic.Game;
 import fr.umontpellier.iut.bang.logic.GameState;
 import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.logic.cards.Card;
+import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
 import fr.umontpellier.iut.bang.views.PlayerSelectionArea;
@@ -20,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -33,20 +35,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyGameView extends GameView {
-    Button buttonPasser;
-    Pane tout = new Pane();
-    List<MyPlayerArea> mains = new ArrayList<>();
-    IGame game;
-    BangIHM bangIHM;
-    Label currentState = new Label();
-    List<MyPlayerSelectionArea> joueursArea;
+    private Button buttonPasser;
+    private Pane tout = new Pane();
+    private List<MyPlayerArea> mains = new ArrayList<>();
+    private IGame game;
+    private BangIHM bangIHM;
+    private Label currentState = new Label();
+    private List<MyPlayerSelectionArea> joueursArea;
+    private ImageView hautDefosse;
+    private Pane defausse;
+
 
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
         this.game=game;
         this.bangIHM=bangIHM;
         joueursArea = new ArrayList<>();
-
         //initialisation main joueur
         for (Player p : game.getPlayers()) {
             MyPlayerArea imageMain = new MyPlayerArea(new IPlayer(p), this);
@@ -195,7 +199,7 @@ public class MyGameView extends GameView {
         emplacementPioche.setPrefWidth(100);
         tout.getChildren().add(emplacementPioche);
 
-        ImageView piochec = new ImageView("src/main/resources/images/characters/bartcassidy.png");
+        ImageView piochec = new ImageView(CardView.getBack());
         piochec.setPreserveRatio(true);
         piochec.setFitHeight(150);
         pioche.getChildren().add(piochec); // exemple card
@@ -203,7 +207,9 @@ public class MyGameView extends GameView {
 
         //défausse
         VBox emplacementDefausse = new VBox();
-        Pane defausse = new Pane();
+        defausse = new Pane();
+        //Card haut = game.getGame().getDiscardPile().getFirst();
+
         Label labelDefausse = new Label("Défausse");
         labelDefausse.setId("but");
         labelDefausse.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
@@ -220,10 +226,11 @@ public class MyGameView extends GameView {
         emplacementDefausse.setPrefWidth(100);
         tout.getChildren().add(emplacementDefausse);
 
-        ImageView defaussec = new ImageView("src/main/resources/images/characters/bartcassidy.png");
+        /*Image hautDefausse = new Image(haut.getImageName());
+        ImageView defaussec = new ImageView(hautDefausse);
         defaussec.setPreserveRatio(true);
         defaussec.setFitHeight(150);
-        defausse.getChildren().add(defaussec); // exemple card
+        defausse.getChildren().add(defaussec); // exemple card */
 
 
         //Label Current State
@@ -324,13 +331,14 @@ public class MyGameView extends GameView {
         public void changed(ObservableValue<? extends Card> observableValue, Card oldCard, Card newCard) {
             if(newCard !=null){
                 System.out.println("je rentre dans l'attaque");
-
-                for (MyPlayerSelectionArea myPlayerSelectionArea : joueursArea) {
+                setHautDefosse(newCard);
+                /*for (MyPlayerSelectionArea myPlayerSelectionArea : joueursArea) {
                     System.out.println(getIGame().getPossibleTargets());
                     if (getIGame().getPossibleTargets().contains(myPlayerSelectionArea.getPlayerArea().getPlayer())) {
 
                     }
-                }
+                }*/
+
             }
         }
     };
@@ -349,9 +357,8 @@ public class MyGameView extends GameView {
                 dead.setOpacity(0.5);
                 dead.setHeight(200);
                 dead.setWidth(300);
+                isDead.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
 
-
-                System.out.println("BAAAMMM");
                 for (Player p : change.getRemoved()){
                     for(MyPlayerSelectionArea pA : joueursArea){
                         if (pA.getPlayerArea().getPlayer().equals(p)){
@@ -366,8 +373,14 @@ public class MyGameView extends GameView {
     };
 
     public MyPlayerArea getPlayerAeraCourante(MyPlayerArea courante){
-
         return findPlayerArea(courante.getGameView().getIGame().getCurrentPlayer());
     }
 
+    public void setHautDefosse(Card haut){
+        Image carte = new Image(haut.getImageName());
+        hautDefosse = new ImageView(carte);
+        hautDefosse.setPreserveRatio(true);
+        hautDefosse.setFitHeight(150);
+        defausse.getChildren().add(hautDefosse);
+    }
 }
