@@ -390,10 +390,10 @@ public class Game {
         cards.add(new Bang(14, SPADE));
         for (int i = 6; i <= 11; i++)
             cards.add(new Beer(i, HEART));
-        cards.add(new CatBalou(9, DIAMOND));
+      /*  cards.add(new CatBalou(9, DIAMOND));
         cards.add(new CatBalou(10, DIAMOND));
         cards.add(new CatBalou(11, DIAMOND));
-        cards.add(new CatBalou(13, HEART));
+        cards.add(new CatBalou(13, HEART));*/
         cards.add(new Duel(8, CLUB));
         cards.add(new Duel(11, SPADE));
         cards.add(new Duel(12, DIAMOND));
@@ -406,13 +406,13 @@ public class Game {
         for (int i = 10; i <= 14; i++)
             cards.add(new Missed(i, CLUB));
 
-        cards.add(new Panic(11, HEART));
+        /*cards.add(new Panic(11, HEART));
         cards.add(new Panic(12, HEART));
         cards.add(new Panic(14, HEART));
-        cards.add(new Panic(8, DIAMOND));
+        cards.add(new Panic(8, DIAMOND));*/
         cards.add(new Saloon(5, HEART));
-        cards.add(new GeneralStore(9, CLUB));
-        cards.add(new GeneralStore(12, SPADE));
+        /*cards.add(new GeneralStore(9, CLUB));
+        cards.add(new GeneralStore(12, SPADE));*/
         cards.add(new Stagecoach(9, SPADE));
         cards.add(new Stagecoach(9, SPADE));
         cards.add(new WellsFargo(3, HEART));
