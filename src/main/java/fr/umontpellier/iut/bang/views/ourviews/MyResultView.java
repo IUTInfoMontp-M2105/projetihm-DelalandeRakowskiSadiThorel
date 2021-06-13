@@ -38,9 +38,10 @@ public class MyResultView extends ResultsView {
     private ArrayList<Player> winners;
     private GridPane aliV ;
     private Pane imageder;
+    private BorderPane tout;
     public MyResultView(BangIHM bangIHM, ArrayList<Player> winners){
         super(bangIHM);
-        BorderPane tout = new BorderPane();
+        tout = new BorderPane();
         Scene scene =new Scene(tout);
         this.winners=winners;
 
@@ -173,13 +174,10 @@ public class MyResultView extends ResultsView {
             if(change.wasAdded()){
                 winners.addAll(change.getAddedSubList());
                 getBangIHM().initResultView(winners);
-                System.out.println(winners);
             }
         }
     };
-     private void ajouterGagnant(){
 
-     }
     public String getImageCharacter(Player playerImg) {
         return "images/characters/" + playerImg.getBangCharacter().getName().toLowerCase().replaceAll(" ", "")+".png";
     }
