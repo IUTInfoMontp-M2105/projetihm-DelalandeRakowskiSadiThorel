@@ -1,9 +1,11 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.BangIHM;
+import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.views.ResultsView;
 
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,6 +17,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyResultView extends ResultsView {
     private Button buttonPlayAgain;
@@ -28,6 +33,7 @@ public class MyResultView extends ResultsView {
     private HBox millieu;
     private VBox gagnant;
     private Rectangle rectangle;
+    private List<Player> winners = new ArrayList<>();
 
     public MyResultView(BangIHM bangIHM){
         super(bangIHM);
@@ -148,6 +154,7 @@ public class MyResultView extends ResultsView {
         tout.setCenter(millieu);
         setWidth(1500);
         setHeight(750);
+        setWinnersListener(winnerListenner);
         setScene(scene);
     }
 
@@ -161,5 +168,21 @@ public class MyResultView extends ResultsView {
     public void stop(){
         getBangIHM().onStopGame();
     }
+
+    private MyResultView getMyResultView (){
+        return this;
+    }
+
+
+    private ListChangeListener<Player> winnerListenner = new ListChangeListener<Player>() {
+        @Override
+        public void onChanged(Change<? extends Player> change) {
+            change.next();
+            if(change.wasAdded()){
+                winners.addAll(change.getAddedSubList());
+                getBangIHM().initResultView();
+            }
+        }
+    };
 
 }

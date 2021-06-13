@@ -78,6 +78,7 @@ public class BangIHM extends Application {
      */
     public void initResultView() {
         resultsView = new MyResultView(this);
+        primaryStage.setScene(resultsView.getScene());
     }
 
     private final ListChangeListener<String> whenPlayersNamesListIsSet = change -> {
@@ -106,4 +107,7 @@ public class BangIHM extends Application {
             Platform.exit();
         }
     }
+
+
+
 }

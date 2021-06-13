@@ -45,7 +45,6 @@ public class MyGameView extends GameView {
     private List<MyPlayerSelectionArea> joueursArea;
     private ImageView hautDefosse;
     private Pane defausse;
-    private Button buttonFin;
 
 
     public MyGameView(IGame game,BangIHM bangIHM) {
@@ -243,7 +242,6 @@ public class MyGameView extends GameView {
         tout.getChildren().add(currentState);
         setCurrentStateChangesListener(whenCurrentStateChanges);
 
-        setRemoveFinJeuListener(finJeuListener);
         setRemoveDeadPlayerAreaListener(deadPlayerAreaListener);
         setWidth(1500);
         setHeight(750);
@@ -376,28 +374,6 @@ public class MyGameView extends GameView {
     public MyPlayerArea getPlayerAeraCourante(MyPlayerArea courante){
         return findPlayerArea(courante.getGameView().getIGame().getCurrentPlayer());
     }
-    private ListChangeListener<Player> finJeuListener = new ListChangeListener<Player>() {
-        @Override
-        public void onChanged(Change<? extends Player> change) {
-            while(change.next()){
-                if(change.wasRemoved()){
-                }
-                buttonFin = new Button("Fin du Jeu !");
-                buttonFin.setOnAction(event -> bangIHM.initResultView());
-                buttonFin.setPrefWidth(150.0);
-                buttonFin.setPrefHeight(50.0);
-                buttonFin.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 40));
-                buttonFin.getStylesheets().add(this.getClass().getClassLoader().getResource("src/main/resources/Css/accueil.css").toExternalForm());
-
-                for (Player p : change.getRemoved()){
-                    if (p.getRole() == Role.SHERIFF){
-                        tout.getChildren().add(buttonFin);
-                    }
-
-                }
-            }
-        }
-    };
 
     public void setHautDefosse(Card haut){
         Image carte = new Image(haut.getImageName());
@@ -405,5 +381,9 @@ public class MyGameView extends GameView {
         hautDefosse.setPreserveRatio(true);
         hautDefosse.setFitHeight(150);
         defausse.getChildren().add(hautDefosse);
+    }
+
+    public MyGameView getMyGameView(){
+        return this;
     }
 }
