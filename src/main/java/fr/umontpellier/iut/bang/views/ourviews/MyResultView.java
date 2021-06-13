@@ -1,7 +1,9 @@
 package fr.umontpellier.iut.bang.views.ourviews;
 
 import fr.umontpellier.iut.bang.BangIHM;
+import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.Player;
+import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.ResultsView;
 
 import javafx.application.Platform;
@@ -12,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -29,12 +32,12 @@ public class MyResultView extends ResultsView {
     private ImageView titre;
     private HBox haut;
     private Label label;
-    private Label nomJoueur;
     private HBox millieu;
     private VBox gagnant;
     private Rectangle rectangle;
     private List<Player> winners = new ArrayList<>();
-
+    private GridPane aliV ;
+    private Pane imageder;
     public MyResultView(BangIHM bangIHM){
         super(bangIHM);
         BorderPane tout = new BorderPane();
@@ -56,7 +59,7 @@ public class MyResultView extends ResultsView {
         tout.getChildren().add(background);
 
         // image derriere gagnant
-        Pane imageder = new Pane();
+        imageder = new Pane();
         rectangle = new Rectangle();
         rectangle.setWidth(350);
         rectangle.setHeight(380);
@@ -66,42 +69,38 @@ public class MyResultView extends ResultsView {
         imageder.getChildren().add(rectangle);
 
         //alignement de image et nom
-        VBox aliV = new VBox();
-        /*aliV.setBorder(new Border(new BorderStroke(Color.BLACK,
+        aliV = new GridPane();
+        aliV.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,new BorderWidths(1))));*/
-        HBox aliNom = new HBox();
-        HBox aliImg = new HBox();
+                CornerRadii.EMPTY,new BorderWidths(1))));
         aliV.setAlignment(Pos.CENTER);
         aliV.setPrefWidth(350);
         aliV.setPrefHeight(300);
-        aliImg.setAlignment(Pos.CENTER);
-        aliNom.setAlignment(Pos.CENTER);
-        aliV.getChildren().add(aliImg);
-        aliV.getChildren().add(aliNom);
         imageder.getChildren().add(aliV);
 
-        // gagnant :
-        /*bangIHM.getIGame().winnersProperty().get(0).getBangCharacter();*/
 
-        // nomDuJoueur (label)
-        Label nomDuJoueur = new Label("Super Man");
-        nomDuJoueur.setAlignment(Pos.CENTER);
-        nomDuJoueur.setPrefWidth(350);
-                /*nomDuJoueur.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,new BorderWidths(1))));*/
-        nomDuJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
-        nomDuJoueur.setTextFill(Color.web("#000000"));
-        nomDuJoueur.setStyle("-fx-font-weight: bold");
-        aliNom.getChildren().add(nomDuJoueur);
+
 
         // image du gagnant
-        String stringGa = "src/main/resources/images/characters/bartcassidy.png";
-        ImageView imgGagnant = new ImageView(stringGa);
-        imgGagnant.setPreserveRatio(true);
-        imgGagnant.setFitHeight(200);
-        aliImg.getChildren().add(imgGagnant);
+
+
+
+        /*//gagnant
+        GridPane gagnant = new GridPane();
+        for (int i =0 ; i<winners.size();i++){
+            MyPlayerArea v = new MyPlayerArea(new IPlayer(winners.get(i)),new MyGameView(bangIHM.getIGame(), bangIHM));
+            ImageView imageCarte = v.getCard();
+            imageCarte.setPreserveRatio(true);
+            imageCarte.setFitHeight(200);
+            Label nomJoueur = v.getLabelName();
+            nomJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
+            nomJoueur.setTextFill(Color.web("#000000"));
+            nomJoueur.setStyle("-fx-font-weight: bold");
+            nomJoueur.setAlignment(Pos.CENTER);
+            gagnant.add(imageCarte,i,1);
+            gagnant.add(nomJoueur,i,2);
+        }
+        imageder.getChildren().add(gagnant);*/
 
 
         //création button Rejouer et set de l'action quand pressé
@@ -181,8 +180,30 @@ public class MyResultView extends ResultsView {
             if(change.wasAdded()){
                 winners.addAll(change.getAddedSubList());
                 getBangIHM().initResultView();
+                System.out.println(winners);
+                ajouterGagnant();
             }
         }
     };
+     private void ajouterGagnant(){
+         for (int i =0 ; i<winners.size();i++) {
+             System.out.println("je suis rentré dans le for");
+             String charactereImage= getImageCharacter(winners.get(i));
+             System.out.println(charactereImage);
+             ImageView imageCarte = new ImageView(charactereImage);
+             imageCarte.setPreserveRatio(true);
+             imageCarte.setFitHeight(200);
+             Label nomJoueur = new Label(winners.get(i).getName());
+             nomJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
+             nomJoueur.setTextFill(Color.web("#000000"));
+             nomJoueur.setStyle("-fx-font-weight: bold");
+             nomJoueur.setAlignment(Pos.CENTER);
+             aliV.add(imageCarte, i, 1);
+             aliV.add(nomJoueur, i, 2);
+         }
+     }
+    public String getImageCharacter(Player playerImg) {
+        return "images/characters/" + playerImg.getBangCharacter().getName().toLowerCase().replaceAll(" ", "")+".png";
+    }
 
 }
