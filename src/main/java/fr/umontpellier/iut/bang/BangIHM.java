@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.bang;
 
 import fr.umontpellier.iut.bang.logic.Game;
+import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.ResultsView;
 import fr.umontpellier.iut.bang.views.StartView;
@@ -46,7 +47,7 @@ public class BangIHM extends Application {
         List<String> playerNames = startView.getPlayersNamesList();
         game = new IGame(new Game(Game.makePlayers(playerNames.toArray(new String[playerNames.size()]))));
         initGameView();
-        initResultView();
+        initResultView(new ArrayList<Player>());
         Scene scene = new Scene(gameView);
         primaryStage.setHeight(750);
         primaryStage.setWidth(1500);
@@ -76,8 +77,8 @@ public class BangIHM extends Application {
     /**
      * Pour instancier la vue de fin de partie
      */
-    public void initResultView() {
-        resultsView = new MyResultView(this);
+    public void initResultView( ArrayList<Player> winners) {
+        resultsView = new MyResultView(this,winners);
         primaryStage.setScene(resultsView.getScene());
     }
 

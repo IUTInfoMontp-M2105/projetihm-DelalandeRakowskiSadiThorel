@@ -35,13 +35,14 @@ public class MyResultView extends ResultsView {
     private HBox millieu;
     private VBox gagnant;
     private Rectangle rectangle;
-    private List<Player> winners = new ArrayList<>();
+    private ArrayList<Player> winners;
     private GridPane aliV ;
     private Pane imageder;
-    public MyResultView(BangIHM bangIHM){
+    public MyResultView(BangIHM bangIHM, ArrayList<Player> winners){
         super(bangIHM);
         BorderPane tout = new BorderPane();
         Scene scene =new Scene(tout);
+        this.winners=winners;
 
         //label Est gagant
         label = new Label();
@@ -70,37 +71,29 @@ public class MyResultView extends ResultsView {
 
         //alignement de image et nom
         aliV = new GridPane();
-        aliV.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,new BorderWidths(1))));
         aliV.setAlignment(Pos.CENTER);
         aliV.setPrefWidth(350);
         aliV.setPrefHeight(300);
-        imageder.getChildren().add(aliV);
 
 
-
-
-        // image du gagnant
-
-
-
-        /*//gagnant
-        GridPane gagnant = new GridPane();
-        for (int i =0 ; i<winners.size();i++){
-            MyPlayerArea v = new MyPlayerArea(new IPlayer(winners.get(i)),new MyGameView(bangIHM.getIGame(), bangIHM));
-            ImageView imageCarte = v.getCard();
+        for (int i =0 ; i<winners.size();i++) {
+            System.out.println("je suis rentré dans le for");
+            String charactereImage= getImageCharacter(winners.get(i));
+            System.out.println(charactereImage);
+            ImageView imageCarte = new ImageView(charactereImage);
             imageCarte.setPreserveRatio(true);
             imageCarte.setFitHeight(200);
-            Label nomJoueur = v.getLabelName();
+            Label nomJoueur = new Label(winners.get(i).getName());
             nomJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
             nomJoueur.setTextFill(Color.web("#000000"));
             nomJoueur.setStyle("-fx-font-weight: bold");
             nomJoueur.setAlignment(Pos.CENTER);
-            gagnant.add(imageCarte,i,1);
-            gagnant.add(nomJoueur,i,2);
+            aliV.setAlignment(Pos.CENTER);
+            aliV.setHgap(5);
+            aliV.add(imageCarte, i, 1);
+            aliV.add(nomJoueur, i, 2);
         }
-        imageder.getChildren().add(gagnant);*/
+        imageder.getChildren().add(aliV);
 
 
         //création button Rejouer et set de l'action quand pressé
@@ -179,28 +172,13 @@ public class MyResultView extends ResultsView {
             change.next();
             if(change.wasAdded()){
                 winners.addAll(change.getAddedSubList());
-                getBangIHM().initResultView();
+                getBangIHM().initResultView(winners);
                 System.out.println(winners);
-                ajouterGagnant();
             }
         }
     };
      private void ajouterGagnant(){
-         for (int i =0 ; i<winners.size();i++) {
-             System.out.println("je suis rentré dans le for");
-             String charactereImage= getImageCharacter(winners.get(i));
-             System.out.println(charactereImage);
-             ImageView imageCarte = new ImageView(charactereImage);
-             imageCarte.setPreserveRatio(true);
-             imageCarte.setFitHeight(200);
-             Label nomJoueur = new Label(winners.get(i).getName());
-             nomJoueur.setFont(Font.loadFont("file:src/main/resources/fonts/Graduate.ttf", 25));
-             nomJoueur.setTextFill(Color.web("#000000"));
-             nomJoueur.setStyle("-fx-font-weight: bold");
-             nomJoueur.setAlignment(Pos.CENTER);
-             aliV.add(imageCarte, i, 1);
-             aliV.add(nomJoueur, i, 2);
-         }
+
      }
     public String getImageCharacter(Player playerImg) {
         return "images/characters/" + playerImg.getBangCharacter().getName().toLowerCase().replaceAll(" ", "")+".png";
