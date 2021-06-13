@@ -122,7 +122,7 @@ public class MyPlayerArea extends PlayerArea {
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number ancientNumber, Number newNumber) {
             int dif = ancientNumber.intValue() - newNumber.intValue();
-            if (dif > 0) { // perd
+            if (dif ==1) { // perd
                 health.getChildren().remove(newNumber.intValue());
                 ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
                 pointEnMoins.setPreserveRatio(true);
@@ -136,6 +136,15 @@ public class MyPlayerArea extends PlayerArea {
                 pointEnPlus.setPreserveRatio(true);
                 pointEnPlus.setFitHeight(15);
                 health.getChildren().add(ancientNumber.intValue(),pointEnPlus);
+            }
+            if (dif ==3){
+                for (int i =0;i<3;i++) {
+                    health.getChildren().remove(i);
+                    ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
+                    pointEnMoins.setPreserveRatio(true);
+                    pointEnMoins.setFitHeight(15);
+                    health.getChildren().add(i, pointEnMoins);
+                }
             }
         }
     } ;
