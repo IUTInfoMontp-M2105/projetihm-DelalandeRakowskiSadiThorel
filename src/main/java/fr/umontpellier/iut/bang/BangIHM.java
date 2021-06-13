@@ -5,6 +5,7 @@ import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.ResultsView;
 import fr.umontpellier.iut.bang.views.StartView;
 import fr.umontpellier.iut.bang.views.ourviews.MyGameView;
+import fr.umontpellier.iut.bang.views.ourviews.MyResultView;
 import fr.umontpellier.iut.bang.views.ourviews.MyStartView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -76,7 +77,7 @@ public class BangIHM extends Application {
      * Pour instancier la vue de fin de partie
      */
     private void initResultView() {
-        resultsView = null;
+        resultsView = new MyResultView(this);
     }
 
     private final ListChangeListener<String> whenPlayersNamesListIsSet = change -> {
