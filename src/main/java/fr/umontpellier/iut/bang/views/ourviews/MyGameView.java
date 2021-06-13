@@ -302,7 +302,7 @@ public class MyGameView extends GameView {
                     p.setRectangle(r);
                 }
             }
-            findPlayerArea(newPlayer).highlightCurrentArea();
+
             tout.getChildren().add(findPlayerArea(newPlayer));
 
         }
@@ -340,16 +340,26 @@ public class MyGameView extends GameView {
         public void onChanged(Change<? extends Player> change) {
             change.next();
             if(change.wasRemoved()){
+                Rectangle dead = new Rectangle();
+                Label isDead = new Label("Dead");
+                isDead.setTextFill(Color.RED);
+                isDead.setAlignment(Pos.CENTER);
+                dead.setOpacity(0.9);
+                dead.setFill(Color.BLACK);
+                dead.setOpacity(0.5);
+                dead.setHeight(200);
+                dead.setWidth(300);
+
+
+                System.out.println("BAAAMMM");
                 for (Player p : change.getRemoved()){
-                    HBox dead = new HBox();
-                    Label isDead = new Label("Dead");
-                    isDead.setTextFill(new Color(255,0,0,0));
-                    isDead.setAlignment(Pos.CENTER);
-                    dead.setOpacity(0.9);
-                    dead.setStyle("-fx-background-color: #1a1b1f");
-                    dead.setPrefSize(300,200);
-                    dead.getChildren().add(isDead);
-                    findPlayerArea(p).getChildren().add(dead);
+                    for(MyPlayerSelectionArea pA : joueursArea){
+                        if (pA.getPlayerArea().getPlayer().equals(p)){
+                            pA.setDead(dead);
+                            pA.setLabelDead(isDead);
+                        }
+                    }
+
                 }
             }
         }

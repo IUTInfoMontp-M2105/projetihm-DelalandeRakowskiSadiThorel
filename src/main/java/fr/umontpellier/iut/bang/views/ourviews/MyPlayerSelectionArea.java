@@ -27,6 +27,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private MyCardView gun;
     private PlayerArea playerArea;
     private Rectangle rectangle;
+    private Rectangle dead;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
         super(playerArea);
         this.playerArea = playerArea;
@@ -36,6 +37,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         health=playerArea.getHealth();
         gun=playerArea.getGun();
         rectangle = new Rectangle();
+        dead = new Rectangle();
         HBox triche = new HBox(); // triche permet un espace entre la carte Charactere et les cartes inplay
         triche.setMinHeight(5);
         triche.setMaxHeight(5); // inutile mais principalement pour éviter les problèmes
@@ -131,6 +133,15 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     public void setRectangleTransparant(){
         rectangle.setOpacity(0);
         getChildren().remove(rectangle);
+    }
+
+    public void setDead(Rectangle rect){
+        dead = rect;
+        getChildren().add(dead);
+    }
+
+    public void setLabelDead(Label d){
+        getChildren().add(d);
     }
 
 }
