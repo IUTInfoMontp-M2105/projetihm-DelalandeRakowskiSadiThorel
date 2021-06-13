@@ -119,4 +119,5 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     public PlayerArea getPlayerArea() {
         return playerArea;
     }
+
 }

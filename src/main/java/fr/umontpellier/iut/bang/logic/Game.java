@@ -662,6 +662,10 @@ public class Game {
         return joiner.toString();
     }
 
+    public List<Player> getPossibleTargets() {
+        return possibleTargets;
+    }
+
     public List<Card> getNextPossibleCards() {
         return nextPossibleCards;
     }

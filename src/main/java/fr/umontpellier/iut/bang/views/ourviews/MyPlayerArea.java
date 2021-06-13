@@ -30,6 +30,7 @@ public class MyPlayerArea extends PlayerArea {
     private MyCardView gun;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
+
     public MyPlayerArea(IPlayer player, GameView gameView) {
         super(player, gameView);
         selection = new MyPlayerSelectionArea(this);
@@ -46,6 +47,7 @@ public class MyPlayerArea extends PlayerArea {
         inPlay.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,new BorderWidths(1))));
+        HBox nom = new HBox();
         nomDuJoueur = new Label(player.getName());
 
         health=new VBox();
@@ -149,7 +151,7 @@ public class MyPlayerArea extends PlayerArea {
     }
     @Override
     public void highlightCurrentArea() {
-        setStyle("-fx-background-color:#8fa9ca");
+        nomDuJoueur.setStyle("-fx-tick-label-fill: red ");
 
     }
 

@@ -230,7 +230,7 @@ public class MyGameView extends GameView {
         currentState.setLayoutX(1100);
         currentState.setLayoutY(250);
         currentState.setMaxHeight(50);
-        currentState.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
+        currentState.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         tout.getChildren().add(currentState);
         setCurrentStateChangesListener(whenCurrentStateChanges);
 
@@ -242,7 +242,7 @@ public class MyGameView extends GameView {
         setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant change faire
         setPassSelectedListener();
         getIGame().run();
-
+        setCurrentAttackChangesListener(currentAttackChangesListener);
         currentState.setText(game.getCurrentPlayer().getName() + " Choose card to play"); // texte initiale de currentState
 
 
@@ -285,13 +285,16 @@ public class MyGameView extends GameView {
                     }
                 }
                 tout.getChildren().remove(findPlayerArea(oldplayer));
+                findPlayerArea(newPlayer).deHightlightCurrentArea();
 
             }
             for(MyPlayerSelectionArea p : joueursArea){
                 if (p.getPlayerArea().getPlayer().equals(newPlayer)){
                     p.setVisible();
+
                 }
             }
+            findPlayerArea(newPlayer).highlightCurrentArea();
             tout.getChildren().add(findPlayerArea(newPlayer));
 
         }
@@ -310,8 +313,20 @@ public class MyGameView extends GameView {
      */
     private ChangeListener<Card> currentAttackChangesListener = new ChangeListener<Card>() {
         @Override
-        public void changed(ObservableValue<? extends Card> observableValue, Card card, Card t1) {
+        public void changed(ObservableValue<? extends Card> observableValue, Card oldCard, Card newCard) {
+            if(newCard !=null){
+                System.out.println("je rentre dans l'attaque");
+                List<Player> ciblesPossibles = new ArrayList<>(getIGame().getPossibleTargets());
 
+
+                for (MyPlayerSelectionArea myPlayerSelectionArea : joueursArea) {
+                    System.out.println(getIGame().getPossibleTargets());
+                    if (getIGame().getPossibleTargets().contains(myPlayerSelectionArea.getPlayerArea().getPlayer())) {
+                        myPlayerSelectionArea.getPlayerArea().highlightCurrentArea();
+                        System.out.println("je te vise");
+                    }
+                }
+            }
         }
     };
 
