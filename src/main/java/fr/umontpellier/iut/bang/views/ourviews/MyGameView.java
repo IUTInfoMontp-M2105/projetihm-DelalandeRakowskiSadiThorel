@@ -278,20 +278,28 @@ public class MyGameView extends GameView {
         @Override
         public void changed(ObservableValue<? extends Player> observableValue, Player oldplayer, Player newPlayer) {
             //System.out.println("le Joueur courrant à changé"); // change la main du joueur pour celle du courant
+            Rectangle r = new Rectangle();
             if(oldplayer!=null){
+
                 for(MyPlayerSelectionArea p : joueursArea){
                     if (p.getPlayerArea().getPlayer().equals(oldplayer)){
                         p.setUnVisible();
+                        p.setRectangleTransparant();
                     }
                 }
                 tout.getChildren().remove(findPlayerArea(oldplayer));
-                findPlayerArea(newPlayer).deHightlightCurrentArea();
+
 
             }
             for(MyPlayerSelectionArea p : joueursArea){
                 if (p.getPlayerArea().getPlayer().equals(newPlayer)){
                     p.setVisible();
 
+                    r.setHeight(200);
+                    r.setWidth(300);
+                    r.setOpacity(0.4);
+                    r.setFill(Color.LIGHTBLUE);
+                    p.setRectangle(r);
                 }
             }
             findPlayerArea(newPlayer).highlightCurrentArea();
@@ -316,14 +324,11 @@ public class MyGameView extends GameView {
         public void changed(ObservableValue<? extends Card> observableValue, Card oldCard, Card newCard) {
             if(newCard !=null){
                 System.out.println("je rentre dans l'attaque");
-                List<Player> ciblesPossibles = new ArrayList<>(getIGame().getPossibleTargets());
-
 
                 for (MyPlayerSelectionArea myPlayerSelectionArea : joueursArea) {
                     System.out.println(getIGame().getPossibleTargets());
                     if (getIGame().getPossibleTargets().contains(myPlayerSelectionArea.getPlayerArea().getPlayer())) {
-                        myPlayerSelectionArea.getPlayerArea().highlightCurrentArea();
-                        System.out.println("je te vise");
+
                     }
                 }
             }

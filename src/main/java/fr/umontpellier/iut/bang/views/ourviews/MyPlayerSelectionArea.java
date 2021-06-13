@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private BorderPane zoneClique;
@@ -25,6 +26,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private VBox health;
     private MyCardView gun;
     private PlayerArea playerArea;
+    private Rectangle rectangle;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
         super(playerArea);
         this.playerArea = playerArea;
@@ -33,6 +35,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         inPlay=playerArea.getInPlayJoueur();
         health=playerArea.getHealth();
         gun=playerArea.getGun();
+        rectangle = new Rectangle();
         HBox triche = new HBox(); // triche permet un espace entre la carte Charactere et les cartes inplay
         triche.setMinHeight(5);
         triche.setMaxHeight(5); // inutile mais principalement pour éviter les problèmes
@@ -118,6 +121,16 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     @Override
     public PlayerArea getPlayerArea() {
         return playerArea;
+    }
+
+    public void setRectangle(Rectangle rect){
+        rectangle = rect;
+        getChildren().add(rectangle);
+    }
+
+    public void setRectangleTransparant(){
+        rectangle.setOpacity(0);
+        getChildren().remove(rectangle);
     }
 
 }
