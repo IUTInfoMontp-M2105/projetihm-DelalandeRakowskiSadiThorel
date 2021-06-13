@@ -12,12 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class MyPlayerArea extends PlayerArea {
     private HBox mainJoueur;
     private Label nomDuJoueur;
     private HBox inPlay;
+    private VBox health;
     private MyPlayerSelectionArea selection;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
@@ -29,11 +31,24 @@ public class MyPlayerArea extends PlayerArea {
         card.setImage(new Image(cardCharacter));
         cardRole.setImage(new Image(cardRoleString));
         mainJoueur = new HBox();
+        mainJoueur.setSpacing(-25);
+
         inPlay=new HBox();
         inPlay.setSpacing(-25);
         inPlay.setLayoutY(5);
-        mainJoueur.setSpacing(-25);
+        inPlay.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY,new BorderWidths(1))));
         nomDuJoueur = new Label(player.getName());
+
+        health=new VBox();
+        for (int i = 1; i<=player.getHealthPoints();i++){
+            ImageView vie = new ImageView("src/main/resources/images/bullet.png");
+            vie.setPreserveRatio(true);
+            vie.setFitHeight(15);
+            health.getChildren().add(vie);
+        }
+
         setHandListener(whenHandIsUpdated);
         setInPlayListener(whenInplayIsUpdated);
 
@@ -111,5 +126,9 @@ public class MyPlayerArea extends PlayerArea {
 
     public HBox getInPlayJoueur() {
         return inPlay;
+    }
+
+    public VBox getHealth() {
+        return health;
     }
 }

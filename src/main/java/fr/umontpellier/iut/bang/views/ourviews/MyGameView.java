@@ -165,7 +165,7 @@ public class MyGameView extends GameView {
         listJoueurPointer.get(1).setLayoutX(750);
         listJoueurPointer.get(1).setLayoutY(250);
         listJoueurPointer.get(2).setLayoutX(425); // c'est seulement pour l'instant (prévoit que 4 joueur)
-        listJoueurPointer.get(2).setLayoutY(460); // c'est dégueux d'ailleurs
+        listJoueurPointer.get(2).setLayoutY(450); // c'est dégueux d'ailleurs
         listJoueurPointer.get(3).setLayoutX(100);
         listJoueurPointer.get(3).setLayoutY(250);
 

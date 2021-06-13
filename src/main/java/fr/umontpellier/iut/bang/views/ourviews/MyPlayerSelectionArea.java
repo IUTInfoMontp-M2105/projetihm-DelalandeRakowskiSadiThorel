@@ -22,12 +22,14 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private HBox inPlay;
     private ImageView role;
     private Image r;
+    private VBox health;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
 
         super(playerArea);
         zoneClique = new BorderPane();
         nomJoueur = new Label(playerArea.getPlayer().getName());
         inPlay=playerArea.getInPlayJoueur();
+        health=playerArea.getHealth();
         HBox triche = new HBox(); // triche permet un espace entre la carte Charactere et les cartes inplay
         triche.setMinHeight(5);
         triche.setMaxHeight(5); // inutile mais principalement pour éviter les problèmes
@@ -40,7 +42,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         zoneClique.setStyle("-fx-background-color: White");*/
         r = new Image(playerArea.getImageRole(playerArea.getPlayer()));
         ImageView carteCharacter = playerArea.getCard();
-        role = new ImageView();
+        role = new ImageView(r);
         role.setPreserveRatio(true);
         role.setFitHeight(125);
         role.setLayoutX(155);
@@ -57,11 +59,8 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
 
         nomJoueur.setLayoutX(118);
         nomJoueur.setLayoutY(85);
-        HBox l = new HBox();
-        l.getChildren().add(role);
         zoneClique.setPrefSize(300,200);
         zoneClique.setTop(h);
-        zoneClique.setLeft(l);
         zoneClique.setCenter(triche);
         zoneClique.setBottom(inPlay);
         setPlayerSelectedListener();
