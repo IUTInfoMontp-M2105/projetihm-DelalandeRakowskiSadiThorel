@@ -94,13 +94,17 @@ public class MyPlayerArea extends PlayerArea {
                         inPlay.getChildren().add(new MyCardView(new ICard(c), MyPlayerArea.this));
                     }
                 } else if (change.wasRemoved()) {
-                    for (Card c : change.getAddedSubList()) {
-                        inPlay.getChildren().remove(findCardView(inPlay, c));
+                    System.out.println("wow un remove!!");
+                    for (Card c : change.getRemoved()) {
+                        System.out.println(c.toString());
+                        inPlay.getChildren().clear();
                     }
                 }
             }
         }
     };
+
+
     private ChangeListener<WeaponCard> whenWeaponChanges = new ChangeListener<WeaponCard>() {
         @Override
         public void changed(ObservableValue<? extends WeaponCard> observableValue, WeaponCard weaponCard, WeaponCard t1) {
@@ -108,28 +112,28 @@ public class MyPlayerArea extends PlayerArea {
         }
     };
 
+    /*ageProperty().addListener((ObservableValue<? extends Number > observable, Number oldValue, Number newValue) -> {
+  [...]
+    });*/
+
     private ChangeListener <Number> whenHealthPointsIsUpdated = new ChangeListener<Number>() {
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number ancientNumber, Number newNumber) {
             int dif = ancientNumber.intValue() - newNumber.intValue();
-            if (dif > 0) {
-                for (int i = 0; i <dif; i++) {
-                    health.getChildren().remove(i);
-                    ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
-                    pointEnMoins.setPreserveRatio(true);
-                    pointEnMoins.setFitHeight(15);
-                    health.getChildren().add(i,pointEnMoins);
-                }
+            if (dif > 0) { // perd
+                health.getChildren().remove(newNumber.intValue());
+                ImageView pointEnMoins = new ImageView("src/main/resources/images/bullet_grey.png");
+                pointEnMoins.setPreserveRatio(true);
+                pointEnMoins.setFitHeight(15);
+                health.getChildren().add(newNumber.intValue(), pointEnMoins);
             }
-            if (dif < 0) {
+            if (dif < 0) { // gagne
                 System.out.println("je passe par ici mon reuf");
-                for (int i = 0; i > dif; i--) {
-                    health.getChildren().remove(i);
-                    ImageView pointEnPlus = new ImageView("src/main/resources/images/bullet.png");
-                    pointEnPlus.setPreserveRatio(true);
-                    pointEnPlus.setFitHeight(15);
-                    health.getChildren().add(i,pointEnPlus);
-                }
+                health.getChildren().remove(ancientNumber.intValue());
+                ImageView pointEnPlus = new ImageView("src/main/resources/images/bullet.png");
+                pointEnPlus.setPreserveRatio(true);
+                pointEnPlus.setFitHeight(15);
+                health.getChildren().add(ancientNumber.intValue(),pointEnPlus);
             }
         }
     } ;
