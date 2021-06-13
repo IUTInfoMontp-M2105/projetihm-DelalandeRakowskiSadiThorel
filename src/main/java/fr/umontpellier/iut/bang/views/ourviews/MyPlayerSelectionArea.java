@@ -23,7 +23,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private ImageView role;
     private Image r;
     private VBox health;
-    private Pane gun;
+    private ImageView gun;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
 
         super(playerArea);
@@ -59,7 +59,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         règleproblème.setLayoutX(100);
         règleproblème.setCenter(health);
         BorderPane gunRègleProblème = new BorderPane();
-        gunRègleProblème.setLayoutX(75);
+        gunRègleProblème.setLayoutX(50);
         gunRègleProblème.setLayoutY(40);
         gunRègleProblème.setCenter(gun);
         h.getChildren().add(role);

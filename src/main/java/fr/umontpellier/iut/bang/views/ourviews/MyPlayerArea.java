@@ -4,6 +4,7 @@ import fr.umontpellier.iut.bang.ICard;
 import fr.umontpellier.iut.bang.IPlayer;
 import fr.umontpellier.iut.bang.logic.cards.BlueCard;
 import fr.umontpellier.iut.bang.logic.cards.Card;
+import fr.umontpellier.iut.bang.logic.cards.WeaponCard;
 import fr.umontpellier.iut.bang.views.CardView;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
@@ -25,7 +26,7 @@ public class MyPlayerArea extends PlayerArea {
     private HBox inPlay;
     private VBox health;
     private MyPlayerSelectionArea selection;
-    private Pane gun;
+    private ImageView gun;
     ImageView card = new ImageView();
     ImageView cardRole = new ImageView();
     public MyPlayerArea(IPlayer player, GameView gameView) {
@@ -53,15 +54,15 @@ public class MyPlayerArea extends PlayerArea {
             vie.setFitHeight(15);
             health.getChildren().add(vie);
         }
-        gun=new Pane();
-        ImageView gunImg = new ImageView("src/main/resources/images/cards/colt45_1H.png");
-        gunImg.setPreserveRatio(true);
-        gunImg.setFitHeight(85);
-        gun.getChildren().add(gunImg);
+        gun = new ImageView("src/main/resources/images/cards/colt45_1H.png");
+        gun.setPreserveRatio(true);
+        gun.setFitHeight(85);
+
 
         setHandListener(whenHandIsUpdated);
         setInPlayListener(whenInplayIsUpdated);
         setHealthPointsListener(whenHealthPointsIsUpdated);
+        setWeaponListener(whenWeaponChanges);
 
     }
 
@@ -97,6 +98,14 @@ public class MyPlayerArea extends PlayerArea {
                     }
                 }
             }
+        }
+    };
+    private ChangeListener<WeaponCard> whenWeaponChanges = new ChangeListener<WeaponCard>() {
+        @Override
+        public void changed(ObservableValue<? extends WeaponCard> observableValue, WeaponCard weaponCard, WeaponCard t1) {
+            gun.setImage(new Image (t1.getImageName()));
+            gun.setPreserveRatio(true);
+            gun.setFitHeight(85);
         }
     };
 
@@ -170,7 +179,7 @@ public class MyPlayerArea extends PlayerArea {
         return health;
     }
 
-    public Pane getGun() {
+    public ImageView getGun() {
         return gun;
     }
 }
