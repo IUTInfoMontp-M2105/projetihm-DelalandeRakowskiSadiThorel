@@ -24,9 +24,10 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
     private Image r;
     private VBox health;
     private MyCardView gun;
+    private PlayerArea playerArea;
     public MyPlayerSelectionArea(MyPlayerArea playerArea) {
-
         super(playerArea);
+        this.playerArea = playerArea;
         zoneClique = new BorderPane();
         nomJoueur = new Label(playerArea.getPlayer().getName());
         inPlay=playerArea.getInPlayJoueur();
@@ -51,6 +52,7 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
         role.setLayoutY(10);
         role.setRotate(30);
         setVisible();
+        setUnVisible();
         carteCharacter.setPreserveRatio(true);
         carteCharacter.setFitHeight(125);
         carteCharacter.setLayoutX(110);
@@ -82,20 +84,14 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
 
     @Override
     public void setVisible() {
-        if(getPlayerArea().getGameView().getIGame().getCurrentPlayer() !=null){
-            if(getPlayerArea().getGameView().getIGame().getCurrentPlayer().equals(getPlayerArea().getPlayer())){
-                setUnVisible();
-            }
-        }
-
-        else if(getPlayerArea().getIPlayer().getRole() != Role.SHERIFF ){
-            role.setImage(CardView.getBack());
-        }else{setUnVisible();}
+        role.setImage(r);
     }
 
     @Override
     public void setUnVisible() {
-        role.setImage(r);
+        if(getPlayerArea().getIPlayer().getRole() != Role.SHERIFF ){
+            role.setImage(CardView.getBack());
+        }
     }
 
     @Override
@@ -119,5 +115,8 @@ public class MyPlayerSelectionArea extends PlayerSelectionArea {
 
     };
 
-
+    @Override
+    public PlayerArea getPlayerArea() {
+        return playerArea;
+    }
 }

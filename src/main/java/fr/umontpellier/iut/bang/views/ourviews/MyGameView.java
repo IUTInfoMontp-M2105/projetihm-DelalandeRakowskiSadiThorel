@@ -10,6 +10,7 @@ import fr.umontpellier.iut.bang.logic.Player;
 import fr.umontpellier.iut.bang.logic.cards.Card;
 import fr.umontpellier.iut.bang.views.GameView;
 import fr.umontpellier.iut.bang.views.PlayerArea;
+import fr.umontpellier.iut.bang.views.PlayerSelectionArea;
 import javafx.application.HostServices;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -37,11 +39,13 @@ public class MyGameView extends GameView {
     IGame game;
     BangIHM bangIHM;
     Label currentState = new Label();
+    List<MyPlayerSelectionArea> joueursArea;
 
     public MyGameView(IGame game,BangIHM bangIHM) {
         super(game);
         this.game=game;
         this.bangIHM=bangIHM;
+        joueursArea = new ArrayList<>();
 
         //initialisation main joueur
         for (Player p : game.getPlayers()) {
@@ -158,6 +162,7 @@ public class MyGameView extends GameView {
             MyPlayerSelectionArea pA = new MyPlayerSelectionArea(v);
             listJoueurPointer.add(pA);
             tout.getChildren().add(pA);
+            joueursArea.add(pA);
 
         }
         listJoueurPointer.get(0).setLayoutX(425);
@@ -230,10 +235,11 @@ public class MyGameView extends GameView {
         setCurrentStateChangesListener(whenCurrentStateChanges);
 
 
+        setRemoveDeadPlayerAreaListener(deadPlayerAreaListener);
         setWidth(1500);
         setHeight(750);
         getChildren().add(tout);
-        setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant cange faire
+        setCurrentPlayerChangesListener(whenCurrentPlayerChanges); // quand le joueur courant change faire
         setPassSelectedListener();
         getIGame().run();
 
@@ -259,9 +265,9 @@ public class MyGameView extends GameView {
 
 
     }
-    private PlayerArea findPlayerArea(Player player) {
+    private MyPlayerArea findPlayerArea(Player player) {
         for (Node n : mains) {
-            PlayerArea nodePlayerArea = (PlayerArea) n;
+            MyPlayerArea nodePlayerArea = (MyPlayerArea) n;
             Player nodePlayer = nodePlayerArea.getPlayer();
             if (nodePlayer.equals(player))
                 return nodePlayerArea;
@@ -271,11 +277,23 @@ public class MyGameView extends GameView {
     private ChangeListener<? super Player> whenCurrentPlayerChanges = new ChangeListener<Player>() {
         @Override
         public void changed(ObservableValue<? extends Player> observableValue, Player oldplayer, Player newPlayer) {
-            System.out.println("le Joueur courrant à changé"); // change la main du joueur pour celle du courant
+            //System.out.println("le Joueur courrant à changé"); // change la main du joueur pour celle du courant
             if(oldplayer!=null){
+                for(MyPlayerSelectionArea p : joueursArea){
+                    if (p.getPlayerArea().getPlayer().equals(oldplayer)){
+                        p.setUnVisible();
+                    }
+                }
                 tout.getChildren().remove(findPlayerArea(oldplayer));
+
+            }
+            for(MyPlayerSelectionArea p : joueursArea){
+                if (p.getPlayerArea().getPlayer().equals(newPlayer)){
+                    p.setVisible();
+                }
             }
             tout.getChildren().add(findPlayerArea(newPlayer));
+
         }
     };
 
@@ -296,5 +314,30 @@ public class MyGameView extends GameView {
 
         }
     };
+
+    private ListChangeListener<Player> deadPlayerAreaListener = new ListChangeListener<Player>() {
+        @Override
+        public void onChanged(Change<? extends Player> change) {
+            change.next();
+            if(change.wasRemoved()){
+                for (Player p : change.getRemoved()){
+                    HBox dead = new HBox();
+                    Label isDead = new Label("Dead");
+                    isDead.setTextFill(new Color(255,0,0,0));
+                    isDead.setAlignment(Pos.CENTER);
+                    dead.setOpacity(0.9);
+                    dead.setStyle("-fx-background-color: #1a1b1f");
+                    dead.setPrefSize(300,200);
+                    dead.getChildren().add(isDead);
+                    findPlayerArea(p).getChildren().add(dead);
+                }
+            }
+        }
+    };
+
+    public MyPlayerArea getPlayerAeraCourante(MyPlayerArea courante){
+
+        return findPlayerArea(courante.getGameView().getIGame().getCurrentPlayer());
+    }
 
 }

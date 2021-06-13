@@ -181,4 +181,8 @@ public class MyPlayerArea extends PlayerArea {
     public MyCardView getGun() {
         return gun;
     }
+
+    public MyPlayerSelectionArea getSelection() {
+        return selection;
+    }
 }
