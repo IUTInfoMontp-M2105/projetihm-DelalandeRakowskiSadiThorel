@@ -30,6 +30,7 @@ public enum GameState {
 
     @Override
     public String toString() {
+        String name = currentGame.getCurrentPlayer().getName()+" " + label;
         String additionalInformation;
         switch (this) {
             case DISCARD:
@@ -48,7 +49,7 @@ public enum GameState {
             default:
                 additionalInformation = "";
         }
-        return String.format(label, additionalInformation);
+        return String.format(name, additionalInformation);
     }
 
     public static void setGame(Game game) {
