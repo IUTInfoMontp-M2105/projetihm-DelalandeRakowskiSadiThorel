@@ -8,6 +8,8 @@ public abstract class BlueCard extends Card {
     }
 
     @Override
+    public String getCouleur(){return "B";}
+    @Override
     public boolean canPlayFromHand(Player player) {
         // le joueur ne peut jouer une carte bleue que s'il n'en a pas déjà une copie en jeu devant lui
         return player.getCardInPlay(getName()) == null;

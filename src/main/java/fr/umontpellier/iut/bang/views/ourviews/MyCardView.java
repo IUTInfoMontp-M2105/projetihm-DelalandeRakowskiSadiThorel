@@ -13,8 +13,10 @@ import javafx.scene.input.MouseEvent;
 
 public class MyCardView extends CardView {
     ImageView imageCarte = new ImageView();
-    public MyCardView(ICard card, PlayerArea playerArea) {
+    private MyPlayerArea playerArea;
+    public MyCardView(ICard card, MyPlayerArea playerArea) {
         super(card, playerArea);
+        this.playerArea = playerArea;
         String name = card.getImageName();
         imageCarte.setImage(new Image(name));
         imageCarte.setPreserveRatio(true);
@@ -49,5 +51,8 @@ public class MyCardView extends CardView {
         IGame currentGame = selectedCardView.getPlayerArea().getGameView().getIGame();
         IPlayer targetPlayer = selectedCardView.getPlayerArea().getIPlayer();
         currentGame.onCardSelection(selectedCard, targetPlayer);
+        if(!getCard().getCouleur().equals("B")){
+            playerArea.getMyGameView().setHautDefosse(getCard());
+        }
     };
 }
