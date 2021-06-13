@@ -230,7 +230,7 @@ public class MyGameView extends GameView {
         currentState.setLayoutX(1100);
         currentState.setLayoutY(250);
         currentState.setMaxHeight(50);
-        currentState.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 15));
+        currentState.setFont(Font.loadFont("file:src/main/resources/fonts/Bangers.ttf", 25));
         tout.getChildren().add(currentState);
         setCurrentStateChangesListener(whenCurrentStateChanges);
 
