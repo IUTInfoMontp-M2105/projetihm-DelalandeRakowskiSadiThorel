@@ -5,7 +5,7 @@
 ### IUT Montpellier-Sète – Département Informatique
 
 * **Cours:** [M2105](http://cache.media.enseignementsup-recherche.gouv.fr/file/25/09/7/PPN_INFORMATIQUE_256097.pdf) - Le support de cours est [consultable ici](https://iutinfomontp-m2105.github.io/Cours).
-* **Enseignants:** [Kevin Chapuis], [Sophie Nabitz], [Rémy Portier]
+* **Enseignants:** Kevin Chapuis, Sophie Nabitz, Rémy Portier
 
 
 # Projet - _IHM Bang !_
