@@ -5,17 +5,10 @@
 ### IUT Montpellier-Sète – Département Informatique
 
 * **Cours:** [M2105](http://cache.media.enseignementsup-recherche.gouv.fr/file/25/09/7/PPN_INFORMATIQUE_256097.pdf) - Le support de cours est [consultable ici](https://iutinfomontp-m2105.github.io/Cours).
-* **Enseignants:** [Kevin Chapuis](mailto:kevin.chapuis@umontpellier.fr), [Sophie Nabitz](mailto:sophie.nabitz@univ-avignon.fr), [Rémy Portier](mailto:remyportier34@gmail.com)
-* Le [forum Piazza](https://piazza.com/class/kopinpctu3p678) de ce cours pour poser vos questions
-* [Email](mailto:sophie.nabitz@univ-avignon.fr) pour une question d'ordre privée concernant le cours.
+* **Enseignants:** [Kevin Chapuis], [Sophie Nabitz], [Rémy Portier]
 
 
 # Projet - _IHM Bang !_
-
-**Date de rendu : 12 juin 2021 à 23h00**
-
-Le lien pour le fork avec GitHub Classroom et les consignes du projet vous sont données dans le fichier [Consignes.md](Consignes.md).
-_**Le non-respect de ces consignes impliquera des pénalités significatives sur la note du projet**_.
 
 ## Présentation
 Le but de ce projet est de produire une implémentation en _JavaFX_ de l'IHM du jeu de cartes [_Bang!_](https://fr.wikipedia.org/wiki/Bang!_(jeu_de_cartes)). 
@@ -84,15 +77,3 @@ La classe *DrawnCardView* peut être utilisée quand cela a un sens d'afficher l
 Par contre, elles sont enlevées une par une, au fur et à mesure des sélections de l'utilisateur.
 
 La classe *ResultsView*, qui permettra d'afficher les résultats lorsque le gagnant est connu, dépendra de la propriété *winners* déclarée dans *IGame*. Dans cette classe, il est nécessaire d'accéder à *BangIHM* si on souhaite proposer à l'utilisateur d'arrêter de jouer ou de recommencer une partie.
-
-## Rendu attendu
-
-L'intégralité du code source du projet doit résider dans le dépôt GitHub associé à votre équipe de projet. Vous devez compléter les classes Java qui vous sont données, tout en en ajoutant de nouvelles si souhaité.
-
-Vous devez implémenter <u>toutes les méthodes</u> qui sont mentionnées sur le diagramme de classe en en <u>respectant les signatures</u>. Dans vos classes, vous pouvez ajouter toutes les méthodes et tous les attributs qui vous sont nécessaires. A priori, il n'est pas nécessaire d'en ajouter dans les classes abstraites, bien que cela ne soit pas interdit.
-
-## Évaluation
-
-L'évaluation du projet se fera sous la forme d'une soutenance d'environ une demi-heure au cours de laquelle vous expliquerez le travail réalisé, la répartition des tâches, et nous ferez une démonstration (que nous dirigerons). Lors de cette soutenance, nous évaluerons aussi bien la partie ergonomie que la partie implémentation. Nous vous informerons prochainement des principaux critères, la réflexion est encore en cours...
-
-# Bon travail à tous !
